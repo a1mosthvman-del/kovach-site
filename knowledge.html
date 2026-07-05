@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>База знаний — Ковач Гидравлик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-warm:#F4F3EF; --graphite:#262624; --steel:#6B6A66;
+    --steel-line:#D8D6CF; --copper:#C8651F; --spark:#FF6A1A;
+    --display:'Archivo Expanded',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--graphite);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:84px; flex-wrap:nowrap; gap:24px;}
+  .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .logo-mark{width:38px;height:38px;}
+  .logo-mark svg{width:100%;height:100%;}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:0.02em;line-height:1.1;}
+    .logo-link{cursor:pointer; transition:opacity .15s ease;}
+  .logo-link:hover{opacity:0.8;}
+  .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:0.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
+  nav ul{list-style:none; display:flex; gap:26px; white-space:nowrap;}
+  nav ul a{font-size:14px;font-weight:500;color:var(--graphite); white-space:nowrap;}
+  nav ul a:hover{color:var(--copper);}
+  nav ul a.active{color:var(--copper);}
+  .nav-cta{display:flex; align-items:center; gap:16px; flex-shrink:0; white-space:nowrap;}
+  .btn{font-family:var(--body);font-weight:600;font-size:13px;padding:12px 24px;border-radius:2px;letter-spacing:0.02em;border:1.5px solid var(--graphite);cursor:pointer;transition:all .2s ease;background:transparent;}
+  .btn-primary{background:var(--graphite);color:#fff;border-color:var(--graphite);}
+  .btn-primary:hover{background:var(--copper);border-color:var(--copper);}
+  .btn-ghost:hover{border-color:var(--copper);color:var(--copper);}
+
+  .page-head{padding:48px 0 32px;border-bottom:1px solid var(--steel-line);background:var(--bg-warm);}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--copper);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;display:block;}
+  .page-head h1{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-0.01em;}
+  .page-head p{color:var(--steel);font-size:14.5px;margin-top:10px;max-width:560px;}
+
+  .kb-layout{display:grid;grid-template-columns:240px 1fr;gap:48px;padding:56px 0 100px;align-items:start;}
+  .kb-cats{position:sticky;top:108px;}
+  .kb-cats h3{font-family:var(--mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--steel);margin-bottom:16px;}
+  .kb-cats ul{list-style:none;}
+  .kb-cats li{padding:9px 0;font-size:14px;border-bottom:1px solid var(--steel-line);}
+  .kb-cats a:hover{color:var(--copper);}
+  .kb-cats .count{font-family:var(--mono);font-size:11px;color:var(--steel);float:right;}
+
+  .article-group{margin-bottom:56px;}
+  .article-group h2{font-family:var(--display);font-weight:800;font-size:22px;margin-bottom:22px;}
+  .article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--steel-line);border:1px solid var(--steel-line);}
+  .article-card{background:#fff;padding:28px;}
+  .article-card:hover{background:var(--bg-warm);}
+  .article-card .meta{font-family:var(--mono);font-size:11px;color:var(--steel);margin-bottom:12px;}
+  .article-card h3{font-family:var(--display);font-weight:700;font-size:16.5px;margin-bottom:10px;line-height:1.3;}
+  .article-card p{font-size:13.5px;color:var(--steel);line-height:1.6;}
+  .article-card .read{margin-top:16px;font-size:12.5px;font-weight:600;color:var(--copper);}
+
+  footer{background:var(--graphite);color:#fff;padding:48px 0;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12px;color:#74726C;}
+
+  @media (max-width:1040px){
+    nav ul{display:none;}
+    .kb-layout{grid-template-columns:1fr;}
+    .kb-cats{position:static;}
+    .article-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo logo-link">
+      <div class="logo-mark">
+        <svg viewBox="0 0 100 100" fill="none">
+  <!-- Frame: top-left corner (top horizontal line + left vertical line) -->
+  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
+  <!-- Frame: bottom-right corner (bottom line full width) -->
+  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
+  <!-- Bracket top arm + upper spine (graphite) -->
+  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
+  <!-- Bracket lower spine + bottom arm (copper) -->
+  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+        </svg>
+      </div>
+      <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="catalog.html">Продукция</a></li>
+        <li><a href="selection.html">Подбор</a></li>
+        <li><a href="production.html">Производство</a></li>
+        <li><a href="custom-order.html">Под заказ</a></li>
+        <li><a href="knowledge.html" class="active">База знаний</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn btn-primary">Корзина (0)</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="wrap">
+    <span class="tag">База знаний</span>
+    <h1>Как выбрать, смонтировать и обслуживать гидравлику</h1>
+    <p>Инженерные материалы для монтажников, проектировщиков и владельцев частных домов — без воды, по делу.</p>
+  </div>
+</div>
+
+<div class="wrap kb-layout">
+  <aside class="kb-cats">
+    <h3>Разделы</h3>
+    <ul>
+      <li><a href="#vybor">Выбор изделия <span class="count">3</span></a></li>
+      <li><a href="#montazh">Монтаж <span class="count">2</span></a></li>
+      <li><a href="#dokumenty">Документы и сертификаты <span class="count">2</span></a></li>
+      <li><a href="#obsluzhivanie">Обслуживание <span class="count">2</span></a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="article-group" id="vybor">
+      <h2>Выбор изделия</h2>
+      <div class="article-grid">
+        <a class="article-card" href="#">
+          <div class="meta">7 МИН ЧТЕНИЯ · ВЫБОР</div>
+          <h3>Как подобрать гидрострелку по мощности котла</h3>
+          <p>Формула расчёта диаметра, запас по расходу теплоносителя и типичные ошибки при подборе.</p>
+          <div class="read">Читать →</div>
+        </a>
+        <a class="article-card" href="#">
+          <div class="meta">5 МИН ЧТЕНИЯ · ВЫБОР</div>
+          <h3>КГБ1 или КГК1: с байпасом или без</h3>
+          <p>В каких системах нужен встроенный байпас, а где он избыточен — разбор на примерах схем.</p>
+          <div class="read">Читать →</div>
+        </a>
+        <a class="article-card" href="#">
+          <div class="meta">6 МИН ЧТЕНИЯ · ВЫБОР</div>
+          <h3>Сколько контуров закладывать с запасом</h3>
+          <p>Как не упереться в лимит коллектора через 2 года после монтажа — практическое правило запаса.</p>
+          <div class="read">Читать →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="article-group" id="montazh">
+      <h2>Монтаж</h2>
+      <div class="article-grid">
+        <a class="article-card" href="#">
+          <div class="meta">9 МИН ЧТЕНИЯ · МОНТАЖ</div>
+          <h3>Монтаж коллектора: пошаговая инструкция</h3>
+          <p>От подготовки обвязки до опрессовки системы — последовательность и контрольные точки.</p>
+          <div class="read">Читать →</div>
+        </a>
+        <a class="article-card" href="#">
+          <div class="meta">4 МИН ЧТЕНИЯ · МОНТАЖ</div>
+          <h3>Типичные ошибки при установке гидрострелки</h3>
+          <p>Неверное направление потока, отсутствие изоляции, экономия на запорной арматуре.</p>
+          <div class="read">Читать →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="article-group" id="dokumenty">
+      <h2>Документы и сертификаты</h2>
+      <div class="article-grid">
+        <a class="article-card" href="#">
+          <div class="meta">3 МИН ЧТЕНИЯ · ДОКУМЕНТЫ</div>
+          <h3>Сертификаты соответствия и протоколы испытаний</h3>
+          <p>Какие документы прикладываются к каждой партии и как их запросить для проекта.</p>
+          <div class="read">Читать →</div>
+        </a>
+        <a class="article-card" href="#">
+          <div class="meta">4 МИН ЧТЕНИЯ · ДОКУМЕНТЫ</div>
+          <h3>Условия гарантии: что покрывается, а что нет</h3>
+          <p>5 лет гарантии на корпус и сварные швы — подробности и исключения.</p>
+          <div class="read">Читать →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="article-group" id="obsluzhivanie">
+      <h2>Обслуживание</h2>
+      <div class="article-grid">
+        <a class="article-card" href="#">
+          <div class="meta">5 МИН ЧТЕНИЯ · ОБСЛУЖИВАНИЕ</div>
+          <h3>Как часто проверять систему с гидрострелкой</h3>
+          <p>Регламент осмотра, на что обращать внимание при сезонном обслуживании котельной.</p>
+          <div class="read">Читать →</div>
+        </a>
+        <a class="article-card" href="#">
+          <div class="meta">4 МИН ЧТЕНИЯ · ОБСЛУЖИВАНИЕ</div>
+          <h3>Почему нержавеющая сталь не требует консервации</h3>
+          <p>Чем AISI 304 отличается по уходу от углеродистой стали в контуре отопления.</p>
+          <div class="read">Читать →</div>
+        </a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer id="contacts">
+  <div class="wrap footer-bottom">
+    <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
+    <span>ИНН 0000000000 · ISO 9001:2015</span>
+  </div>
+</footer>
+
+</body>
+</html>

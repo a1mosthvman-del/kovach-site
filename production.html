@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Производство — Ковач Гидравлик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-warm:#F4F3EF; --graphite:#262624; --steel:#6B6A66;
+    --steel-line:#D8D6CF; --copper:#C8651F; --spark:#FF6A1A;
+    --display:'Archivo Expanded',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--graphite);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+  img{max-width:100%;display:block;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px;flex-wrap:nowrap;gap:24px;}
+  .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .logo-mark{width:38px;height:38px;}
+  .logo-mark svg{width:100%;height:100%;}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:0.02em;line-height:1.1;}
+    .logo-link{cursor:pointer; transition:opacity .15s ease;}
+  .logo-link:hover{opacity:0.8;}
+  .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:0.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
+  nav ul{list-style:none;display:flex;gap:26px;white-space:nowrap;}
+  nav ul a{font-size:14px;font-weight:500;color:var(--graphite);white-space:nowrap;}
+  nav ul a:hover{color:var(--copper);}
+  nav ul a.active{color:var(--copper);}
+  .nav-cta{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+  .btn{font-family:var(--body);font-weight:600;font-size:13px;padding:12px 24px;border-radius:2px;letter-spacing:0.02em;border:1.5px solid var(--graphite);cursor:pointer;transition:all .2s ease;background:transparent;display:inline-block;}
+  .btn-primary{background:var(--graphite);color:#fff;border-color:var(--graphite);}
+  .btn-primary:hover{background:var(--copper);border-color:var(--copper);}
+  .btn-ghost:hover{border-color:var(--copper);color:var(--copper);}
+
+  /* hero */
+  .page-hero{background:var(--graphite);color:#fff;padding:72px 0 64px;border-bottom:4px solid var(--copper);}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--spark);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;display:block;}
+  .page-hero h1{font-family:var(--display);font-weight:800;font-size:42px;letter-spacing:-0.01em;max-width:680px;line-height:1.05;margin-bottom:20px;}
+  .page-hero p{color:#A8A6A0;font-size:16px;max-width:580px;line-height:1.6;}
+
+  /* overview strip */
+  .overview{border-bottom:1px solid var(--steel-line);}
+  .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  .overview-step{padding:28px 24px;border-right:1px solid var(--steel-line);cursor:pointer;transition:background .15s;}
+  .overview-step:last-child{border-right:none;}
+  .overview-step:hover{background:var(--bg-warm);}
+  .overview-step.active{background:var(--bg-warm);border-bottom:3px solid var(--copper);}
+  .overview-step .num{font-family:var(--mono);font-size:11px;color:var(--copper);margin-bottom:10px;}
+  .overview-step h3{font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:6px;}
+  .overview-step p{font-size:12.5px;color:var(--steel);line-height:1.5;}
+
+  /* step detail sections */
+  .step-section{padding:80px 0;border-bottom:1px solid var(--steel-line);}
+  .step-section:last-of-type{border-bottom:none;}
+  .step-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .step-grid.reverse{direction:rtl;}
+  .step-grid.reverse > *{direction:ltr;}
+
+  .photo-slot{
+    aspect-ratio:4/3;
+    background:var(--bg-warm);
+    border:2px dashed var(--steel-line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;position:relative;overflow:hidden;
+  }
+  .photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;}
+  .photo-slot .placeholder-label{
+    font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:0.08em;text-transform:uppercase;text-align:center;padding:0 20px;
+  }
+  .photo-slot svg{opacity:0.3;}
+
+  .step-num-large{font-family:var(--mono);font-size:11px;color:var(--copper);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+  .step-content h2{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-0.01em;margin-bottom:20px;line-height:1.1;}
+  .step-content p{font-size:15px;color:var(--steel);line-height:1.7;margin-bottom:16px;}
+  .step-content p:last-of-type{margin-bottom:0;}
+
+  .spec-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .spec-tag{font-family:var(--mono);font-size:11.5px;color:var(--graphite);background:var(--bg-warm);border:1px solid var(--steel-line);padding:6px 12px;}
+
+  /* photo grid (2 smaller photos) */
+  .photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .photo-pair .photo-slot{aspect-ratio:3/2;}
+
+  /* values strip */
+  .values{background:var(--bg-warm);padding:72px 0;border-top:1px solid var(--steel-line);}
+  .values h2{font-family:var(--display);font-weight:800;font-size:28px;margin-bottom:48px;letter-spacing:-0.01em;}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--steel-line);border:1px solid var(--steel-line);}
+  .value-card{background:var(--bg-warm);padding:32px 28px;}
+  .value-card .num{font-family:var(--mono);font-size:28px;font-weight:500;color:var(--graphite);margin-bottom:8px;}
+  .value-card .label{font-size:13.5px;color:var(--steel);}
+
+  .cta-band{background:var(--graphite);color:#fff;padding:64px 0;}
+  .cta-band h2{font-family:var(--display);font-weight:800;font-size:28px;margin-bottom:12px;}
+  .cta-band p{color:#A8A6A0;font-size:15px;margin-bottom:28px;max-width:480px;}
+  .cta-band .btn{border-color:#fff;color:#fff;}
+  .cta-band .btn:hover{background:var(--copper);border-color:var(--copper);}
+
+  footer{background:var(--graphite);color:#fff;padding:40px 0;}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:12px;color:#74726C;}
+
+  @media (max-width:1040px){nav ul{display:none;}}
+  @media (max-width:768px){
+    .overview-grid{grid-template-columns:1fr 1fr;}
+    .step-grid,.step-grid.reverse{grid-template-columns:1fr;direction:ltr;}
+    .values-grid{grid-template-columns:1fr;}
+    .photo-pair{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo logo-link">
+      <div class="logo-mark">
+        <svg viewBox="0 0 100 100" fill="none">
+  <!-- Frame: top-left corner (top horizontal line + left vertical line) -->
+  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
+  <!-- Frame: bottom-right corner (bottom line full width) -->
+  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
+  <!-- Bracket top arm + upper spine (graphite) -->
+  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
+  <!-- Bracket lower spine + bottom arm (copper) -->
+  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+        </svg>
+      </div>
+      <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="catalog.html">Продукция</a></li>
+        <li><a href="selection.html">Подбор</a></li>
+        <li><a href="production.html" class="active">Производство</a></li>
+        <li><a href="custom-order.html">Под заказ</a></li>
+        <li><a href="knowledge.html">База знаний</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn btn-primary">Корзина (0)</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="tag">Собственное производство · AISI 304</span>
+    <h1>Полный цикл — от листа металла до протокола испытаний</h1>
+    <p>Собственное оборудование, собственные руки, единая ответственность за результат. Каждое изделие проходит все четыре этапа на одной площадке — от листовой заготовки до протокола гидравлических испытаний.</p>
+  </div>
+</div>
+
+<!-- Quick navigation through steps -->
+<div class="overview">
+  <div class="wrap">
+    <div class="overview-grid">
+      <div class="overview-step active">
+        <div class="num">01 / ЗАГОТОВКА</div>
+        <h3>Раскрой металла</h3>
+        <p>Лазерный раскрой трубной и листовой стали AISI 304</p>
+      </div>
+      <div class="overview-step">
+        <div class="num">02 / СВАРКА</div>
+        <h3>Аргонодуговая сварка</h3>
+        <p>Сварка с поддувом газа, УЗК 100% швов</p>
+      </div>
+      <div class="overview-step">
+        <div class="num">03 / ОБРАБОТКА</div>
+        <h3>Финишная обработка</h3>
+        <p>Нарезка резьбы и зачистка кромок после лазера</p>
+      </div>
+      <div class="overview-step">
+        <div class="num">04 / ИСПЫТАНИЕ</div>
+        <h3>Опрессовка</h3>
+        <p>Гидравлическое испытание каждого изделия</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Step 01 -->
+<section class="step-section" id="step-01">
+  <div class="wrap">
+    <div class="step-grid">
+      <div class="photo-slot">
+        <!-- ФОТО: лазерный раскрой, резак в работе или детали после раскроя -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#6B6A66" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#6B6A66" stroke-width="1.5"/></svg>
+        <div class="placeholder-label">Фото · лазерный раскрой</div>
+      </div>
+      <div class="step-content">
+        <div class="step-num-large">01 / ЗАГОТОВКА</div>
+        <h2>Раскрой металла</h2>
+        <p>Производство начинается с листовой и трубной нержавеющей стали AISI 304. Лазерный раскрой обеспечивает точность реза до 0,1 мм — кромки не требуют вторичной механической доводки, что исключает один из основных источников загрязнения сварного шва.</p>
+        <p>Полное удаление окалины после лазерной резки — обязательный шаг перед сваркой. Окалина на кромке — источник пор и включений в шве. Мы убираем её на этом этапе, а не скрываем в готовом изделии.</p>
+        <div class="spec-tags">
+          <span class="spec-tag">Материал: AISI 304</span>
+          <span class="spec-tag">Точность реза: ±0,1 мм</span>
+          <span class="spec-tag">ГОСТ 19903-2015</span>
+          <span class="spec-tag">Без окалины на кромке</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step 02 -->
+<section class="step-section" id="step-02" style="background:var(--bg-warm);">
+  <div class="wrap">
+    <div class="step-grid reverse">
+      <div class="step-content">
+        <div class="step-num-large">02 / СВАРКА</div>
+        <h2>Аргонодуговая сварка с поддувом</h2>
+        <p>Сварка корпусов выполняется аргонодуговым методом (TIG) с обязательным поддувом защитного газа во внутреннюю полость изделия. Это исключает окисление внутренней поверхности шва — «сахаристость», которая разрушается под давлением и при цикличных температурных нагрузках.</p>
+        <p>Выпуклая геометрия торцевых крышек — не декоративное решение, а конструктивное: такая форма равномерно распределяет давление по всей поверхности и кратно увеличивает ресурс корпуса по сравнению с плоским дном.</p>
+        <p>После сварки — ультразвуковой контроль каждого шва. Проверяется 100% сварных соединений, не выборочно.</p>
+        <div class="spec-tags">
+          <span class="spec-tag">Метод: TIG (аргон)</span>
+          <span class="spec-tag">Поддув защитного газа</span>
+          <span class="spec-tag">УЗК 100% швов</span>
+          <span class="spec-tag">Выпуклое дно корпуса</span>
+        </div>
+      </div>
+      <div>
+        <div class="photo-slot" style="margin-bottom:8px;">
+          <!-- ФОТО: процесс TIG-сварки, горелка на шве, дуга -->
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#6B6A66" stroke-width="1.5"/><path d="M12 8v4l3 3" stroke="#6B6A66" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="placeholder-label">Фото · процесс сварки / дуга</div>
+        </div>
+        <div class="photo-slot">
+          <!-- ФОТО: готовый сварной шов крупным планом или УЗК-контроль -->
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#6B6A66" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#6B6A66" stroke-width="1.5"/></svg>
+          <div class="placeholder-label">Фото · УЗК-контроль шва</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step 03 -->
+<section class="step-section" id="step-03">
+  <div class="wrap">
+    <div class="step-grid">
+      <div class="photo-slot">
+        <!-- ФОТО: нарезка резьбы или готовые патрубки крупным планом -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="#6B6A66" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="5" stroke="#6B6A66" stroke-width="1.5"/></svg>
+        <div class="placeholder-label">Фото · нарезка резьбы / патрубки</div>
+      </div>
+      <div class="step-content">
+        <div class="step-num-large">03 / ОБРАБОТКА</div>
+        <h2>Финишная обработка</h2>
+        <p>После сварки корпус получает резьбу на всех патрубках. Нарезка выполняется на чистом металле, без следов окалины — это обеспечивает точность профиля и класс точности резьбы 6H по ГОСТ.</p>
+        <p>На этом же этапе проводится финальная зачистка кромок, проверка геометрии и маркировка изделия серийным номером. Партия фиксируется в производственном журнале — каждый коллектор прослеживаем от конкретной плавки стали до конкретного объекта.</p>
+        <div class="spec-tags">
+          <span class="spec-tag">Резьба класс 6H</span>
+          <span class="spec-tag">По ГОСТ 6357</span>
+          <span class="spec-tag">Серийная маркировка</span>
+          <span class="spec-tag">Контроль геометрии</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step 04 -->
+<section class="step-section" id="step-04" style="background:var(--bg-warm);">
+  <div class="wrap">
+    <div class="step-grid reverse">
+      <div class="step-content">
+        <div class="step-num-large">04 / ИСПЫТАНИЕ</div>
+        <h2>Гидравлическая опрессовка</h2>
+        <p>Каждое готовое изделие проходит гидравлическое испытание на стенде. Давление — вдвое выше максимального рабочего (до 16 бар), выдержка — 5 минут. Результат фиксируется в протоколе испытаний, который прикладывается к изделию.</p>
+        <p>Это не выборочный контроль — проверяется каждая единица, без исключений. Протокол с серийным номером изделия передаётся заказчику вместе с поставкой.</p>
+        <p>Изделия, прошедшие испытание, упаковываются и маркируются. На патрубки устанавливаются заглушки — коллектор приходит на объект чистым, без попадания посторонних частиц в полость.</p>
+        <div class="spec-tags">
+          <span class="spec-tag">Давление: до 16 бар</span>
+          <span class="spec-tag">Выдержка: 5 минут</span>
+          <span class="spec-tag">100% изделий</span>
+          <span class="spec-tag">Протокол испытаний</span>
+        </div>
+      </div>
+      <div class="photo-slot">
+        <!-- ФОТО: испытательный стенд, манометр, коллектор подключённый к стенду -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#6B6A66" stroke-width="1.5"/><path d="M12 7v5l4 2" stroke="#6B6A66" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="placeholder-label">Фото · стенд опрессовки / манометр</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key numbers -->
+<div class="values">
+  <div class="wrap">
+    <h2>Контроль качества в цифрах</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="num">100%</div>
+        <div class="label">изделий проходят гидравлическое испытание — без выборки</div>
+      </div>
+      <div class="value-card">
+        <div class="num">100%</div>
+        <div class="label">сварных швов проверяются ультразвуковым контролем</div>
+      </div>
+      <div class="value-card">
+        <div class="num">5 лет</div>
+        <div class="label">гарантия на корпус и сварные швы при соблюдении условий эксплуатации</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band" id="contacts">
+  <div class="wrap">
+    <h2>Нужно изделие под нестандартный чертёж?</h2>
+    <p>Изготавливаем коллекторы и гидрострелки по индивидуальным параметрам — тот же материал, тот же контроль качества.</p>
+    <a href="custom-order.html" class="btn">Оставить заявку →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
+    <span>ИНН 0000000000 · ISO 9001:2015</span>
+  </div>
+</footer>
+
+<script>
+// highlight overview step on scroll
+const steps = ['step-01','step-02','step-03','step-04'];
+const overviewSteps = document.querySelectorAll('.overview-step');
+window.addEventListener('scroll',()=>{
+  let current = 0;
+  steps.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top < window.innerHeight*0.5) current = i;
+  });
+  overviewSteps.forEach((el,i)=>el.classList.toggle('active', i===current));
+});
+overviewSteps.forEach((el,i)=>{
+  el.addEventListener('click',()=>{
+    document.getElementById(steps[i]).scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>

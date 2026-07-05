@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подбор изделия — Ковач Гидравлик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--bg-warm:#F4F3EF;--graphite:#262624;--steel:#6B6A66;--steel-line:#D8D6CF;--copper:#C8651F;--spark:#FF6A1A;--display:'Archivo Expanded',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--graphite);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px;flex-wrap:nowrap;gap:24px;}
+.logo{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.logo-mark{width:38px;height:38px;}
+.logo-mark svg{width:100%;height:100%;}
+.logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.1;}
+  .logo-link{cursor:pointer; transition:opacity .15s ease;}
+  .logo-link:hover{opacity:0.8;}
+  .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
+nav ul{list-style:none;display:flex;gap:24px;white-space:nowrap;}
+nav ul a{font-size:14px;font-weight:500;color:var(--graphite);white-space:nowrap;}
+nav ul a:hover,nav ul a.active{color:var(--copper);}
+.nav-cta{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.btn{font-family:var(--body);font-weight:600;font-size:13px;padding:12px 24px;border-radius:2px;letter-spacing:.02em;border:1.5px solid var(--graphite);cursor:pointer;transition:all .2s;background:transparent;display:inline-block;text-align:center;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn-primary{background:var(--graphite);color:#fff;border-color:var(--graphite);}
+.btn-primary:hover:not(:disabled){background:var(--copper);border-color:var(--copper);}
+.btn-copper{background:var(--copper);color:#fff;border-color:var(--copper);width:100%;padding:14px;font-size:14px;}
+.btn-copper:hover{background:#a8541a;border-color:#a8541a;}
+.btn-outline{background:transparent;color:var(--graphite);border-color:var(--steel-line);}
+.btn-outline:hover{border-color:var(--copper);color:var(--copper);}
+
+.page-head{padding:48px 0 40px;background:var(--bg-warm);border-bottom:1px solid var(--steel-line);}
+.tag{font-family:var(--mono);font-size:12px;color:var(--copper);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block;}
+.page-head h1{font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-.01em;margin-bottom:12px;}
+.page-head p{color:var(--steel);font-size:15px;max-width:560px;}
+
+.funnel{padding:56px 0 72px;}
+.funnel-layout{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:start;}
+
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+.step-panel h2{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.01em;margin-bottom:8px;}
+.step-panel .sub{color:var(--steel);font-size:14px;margin-bottom:32px;}
+
+.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:28px;}
+.opt-card{border:1.5px solid var(--steel-line);padding:20px 16px;cursor:pointer;transition:all .15s;background:#fff;}
+.opt-card:hover{border-color:var(--graphite);}
+.opt-card.selected{border-color:var(--copper);background:#FEF8F3;}
+.opt-card .onum{font-family:var(--mono);font-size:18px;font-weight:500;margin-bottom:6px;}
+.opt-card .olabel{font-size:13px;color:var(--steel);line-height:1.4;}
+.opt-card.selected .onum{color:var(--copper);}
+.opt-card.selected .olabel{color:var(--graphite);}
+
+.range-group{margin-bottom:32px;}
+.range-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;align-items:baseline;}
+.range-val{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--copper);}
+input[type=range]{width:100%;accent-color:var(--copper);cursor:pointer;}
+.range-ticks{display:flex;justify-content:space-between;margin-top:6px;}
+.range-ticks span{font-family:var(--mono);font-size:10px;color:var(--steel);}
+
+.step-actions{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--steel-line);margin-top:8px;}
+
+.sidebar{position:sticky;top:108px;}
+.step-nav{list-style:none;border:1px solid var(--steel-line);margin-bottom:16px;}
+.step-nav li{padding:14px 18px;border-bottom:1px solid var(--steel-line);font-size:13px;color:var(--steel);display:flex;align-items:center;gap:10px;}
+.step-nav li:last-child{border-bottom:none;}
+.step-nav li.active{background:var(--bg-warm);color:var(--graphite);font-weight:600;}
+.step-nav li.done{color:var(--graphite);}
+.step-nav .snum{font-family:var(--mono);font-size:11px;width:22px;height:22px;border:1.5px solid var(--steel-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:1px;}
+.step-nav li.active .snum{border-color:var(--graphite);}
+.step-nav li.done .snum{background:var(--copper);border-color:var(--copper);color:#fff;}
+
+.match-box{background:var(--bg-warm);border:1px solid var(--steel-line);padding:20px;}
+.mb-label{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.mb-count{font-family:var(--display);font-weight:800;font-size:32px;margin-bottom:4px;}
+.mb-hint{font-size:12px;color:var(--steel);line-height:1.4;}
+
+.rec-section{padding:48px 0 80px;border-top:1px solid var(--steel-line);display:none;}
+.rec-section.visible{display:block;}
+.rec-section h2{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.01em;margin-bottom:6px;}
+.rec-sub{color:var(--steel);font-size:14px;margin-bottom:36px;}
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--steel-line);border:1px solid var(--steel-line);margin-bottom:20px;}
+.rec-card{background:#fff;padding:28px;}
+.rec-card.best{background:#FEF8F3;border-left:3px solid var(--copper);}
+.rec-badge{font-family:var(--mono);font-size:10px;color:var(--copper);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;min-height:16px;}
+.rec-card h3{font-family:var(--display);font-weight:700;font-size:17px;margin-bottom:12px;}
+.rec-specs .rs{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--steel-line);font-size:13px;}
+.rec-specs .rs:last-child{border-bottom:none;}
+.rec-specs .rsk{color:var(--steel);}
+.rec-specs .rsv{font-family:var(--mono);font-weight:500;}
+.rec-price{font-family:var(--mono);font-size:22px;margin:16px 0 12px;}
+.rec-actions{display:flex;flex-direction:column;gap:8px;}
+.rec-actions .btn{font-size:12.5px;padding:10px 16px;}
+
+.no-match{background:var(--bg-warm);border:1px solid var(--steel-line);padding:48px;text-align:center;display:none;}
+.no-match.visible{display:block;}
+.no-match h3{font-family:var(--display);font-weight:800;font-size:22px;margin-bottom:10px;}
+.no-match p{color:var(--steel);font-size:14px;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+.contact-form{max-width:480px;margin:0 auto;text-align:left;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:10px;font-family:var(--mono);color:var(--steel);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase;}
+.field input,.field textarea{width:100%;padding:12px 14px;border:1px solid var(--steel-line);font-family:var(--body);font-size:14px;color:var(--graphite);background:#fff;}
+.field textarea{min-height:80px;resize:vertical;}
+
+.compare-section{padding:72px 0;background:var(--bg-warm);border-top:1px solid var(--steel-line);}
+.compare-section h2{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.01em;margin-bottom:8px;}
+.cs-sub{color:var(--steel);font-size:14.5px;margin-bottom:40px;max-width:600px;}
+.compare-table{width:100%;border-collapse:collapse;border:1px solid var(--steel-line);}
+.compare-table th{background:var(--graphite);color:#fff;font-family:var(--display);font-weight:700;font-size:13px;padding:14px 18px;text-align:left;}
+.compare-table th:first-child{background:#1a1a18;width:160px;}
+.compare-table td{padding:13px 18px;border-bottom:1px solid var(--steel-line);font-size:13px;vertical-align:top;background:#fff;}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table td:first-child{font-weight:600;color:var(--steel);font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em;background:var(--bg-warm);}
+.compare-table .hi{background:#FEF8F3 !important;}
+.check{color:#2E7D32;}
+.cross{color:#999;}
+
+footer{background:var(--graphite);color:#fff;padding:40px 0;}
+.footer-bottom{display:flex;justify-content:space-between;font-size:12px;color:#74726C;}
+
+@media(max-width:1040px){nav ul{display:none;}}
+@media(max-width:860px){.funnel-layout{grid-template-columns:1fr;}.sidebar{position:static;}.rec-grid{grid-template-columns:1fr;}.option-grid{grid-template-columns:repeat(2,1fr);}.compare-table{font-size:12px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo logo-link">
+      <div class="logo-mark"><svg viewBox="0 0 100 100" fill="none">
+  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
+  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
+  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
+  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+</svg></div>
+      <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="catalog.html">Продукция</a></li>
+        <li><a href="selection.html" class="active">Подбор</a></li>
+        <li><a href="production.html">Производство</a></li>
+        <li><a href="custom-order.html">Под заказ</a></li>
+        <li><a href="knowledge.html">База знаний</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn btn-primary">Корзина (0)</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="wrap">
+    <span class="tag">Подбор изделия</span>
+    <h1>Найдём нужную модель за 3 шага</h1>
+    <p>Укажите параметры — покажем конкретные позиции из каталога с ценами. Если точного совпадения нет — предложим ближайшее или изготовим под заказ.</p>
+  </div>
+</div>
+
+<script id="product-data" type="application/json">[{"id":"кгб1-25-2-0-65квт","name":"КГБ1 25-2.0 (65кВт)","series":"КГБ1","circuits":2,"power_kw":65,"diameter":25,"price_retail":18320,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-2-1-65квт","name":"КГБ1 25-2.1 (65кВт)","series":"КГБ1","circuits":3,"power_kw":65,"diameter":25,"price_retail":18720,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-3-65квт","name":"КГБ1 25-3 (65кВт)","series":"КГБ1","circuits":3,"power_kw":65,"diameter":25,"price_retail":16760,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-3-0-65квт","name":"КГБ1 25-3.0 (65кВт)","series":"КГБ1","circuits":3,"power_kw":65,"diameter":25,"price_retail":22600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-3-1-65квт","name":"КГБ1 25-3.1 (65кВт)","series":"КГБ1","circuits":4,"power_kw":65,"diameter":25,"price_retail":23000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-4-0-65квт","name":"КГБ1 25-4.0 (65кВт)","series":"КГБ1","circuits":4,"power_kw":65,"diameter":25,"price_retail":28000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-4-1-65квт","name":"КГБ1 25-4.1 (65кВт)","series":"КГБ1","circuits":5,"power_kw":65,"diameter":25,"price_retail":28400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-5-65квт","name":"КГБ1 25-5 (65кВт)","series":"КГБ1","circuits":5,"power_kw":65,"diameter":25,"price_retail":23600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-5-0-65квт","name":"КГБ1 25-5.0 (65кВт)","series":"КГБ1","circuits":5,"power_kw":65,"diameter":25,"price_retail":32400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-5-1-65квт","name":"КГБ1 25-5.1 (65кВт)","series":"КГБ1","circuits":6,"power_kw":65,"diameter":25,"price_retail":32800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-6-0-125квт","name":"КГБ1 25-6.0 (125кВт)","series":"КГБ1","circuits":6,"power_kw":125,"diameter":25,"price_retail":72000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-6-1-125квт","name":"КГБ1 25-6.1 (125кВт)","series":"КГБ1","circuits":7,"power_kw":125,"diameter":25,"price_retail":72400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-7-65квт","name":"КГБ1 25-7 (65кВт)","series":"КГБ1","circuits":7,"power_kw":65,"diameter":25,"price_retail":31040,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-7-0-125квт","name":"КГБ1 25-7.0 (125кВт)","series":"КГБ1","circuits":7,"power_kw":125,"diameter":25,"price_retail":88560,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-7-1-125квт","name":"КГБ1 25-7.1 (125кВт)","series":"КГБ1","circuits":8,"power_kw":125,"diameter":25,"price_retail":88960,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-9-125квт","name":"КГБ1 25-9 (125кВт)","series":"КГБ1","circuits":9,"power_kw":125,"diameter":25,"price_retail":76640,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-11-125квт","name":"КГБ1 25-11 (125кВт)","series":"КГБ1","circuits":11,"power_kw":125,"diameter":25,"price_retail":88800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-13-125квт","name":"КГБ1 25-13 (125кВт)","series":"КГБ1","circuits":13,"power_kw":125,"diameter":25,"price_retail":110800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-25-15-125квт","name":"КГБ1 25-15 (125кВт)","series":"КГБ1","circuits":15,"power_kw":125,"diameter":25,"price_retail":123000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-2-0-90квт","name":"КГБ1 32-2.0 (90кВт)","series":"КГБ1","circuits":2,"power_kw":90,"diameter":32,"price_retail":20320,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-2-1-90квт","name":"КГБ1 32-2.1 (90кВт)","series":"КГБ1","circuits":3,"power_kw":90,"diameter":32,"price_retail":20720,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-3-90квт","name":"КГБ1 32-3 (90кВт)","series":"КГБ1","circuits":3,"power_kw":90,"diameter":32,"price_retail":18720,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-3-0-90квт","name":"КГБ1 32-3.0 (90кВт)","series":"КГБ1","circuits":3,"power_kw":90,"diameter":32,"price_retail":24600,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-3-1-90квт","name":"КГБ1 32-3.1 (90кВт)","series":"КГБ1","circuits":4,"power_kw":90,"diameter":32,"price_retail":25000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-4-0-90квт","name":"КГБ1 32-4.0 (90кВт)","series":"КГБ1","circuits":4,"power_kw":90,"diameter":32,"price_retail":30000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-4-1-90квт","name":"КГБ1 32-4.1 (90кВт)","series":"КГБ1","circuits":5,"power_kw":90,"diameter":32,"price_retail":30400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-5-90квт","name":"КГБ1 32-5 (90кВт)","series":"КГБ1","circuits":5,"power_kw":90,"diameter":32,"price_retail":25600,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-5-0-90квт","name":"КГБ1 32-5.0 (90кВт)","series":"КГБ1","circuits":5,"power_kw":90,"diameter":32,"price_retail":34400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-5-1-90квт","name":"КГБ1 32-5.1 (90кВт)","series":"КГБ1","circuits":6,"power_kw":90,"diameter":32,"price_retail":34800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-6-0-150квт","name":"КГБ1 32-6.0 (150кВт)","series":"КГБ1","circuits":6,"power_kw":150,"diameter":32,"price_retail":76400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-6-1-150квт","name":"КГБ1 32-6.1 (150кВт)","series":"КГБ1","circuits":7,"power_kw":150,"diameter":32,"price_retail":76800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-7-90квт","name":"КГБ1 32-7 (90кВт)","series":"КГБ1","circuits":7,"power_kw":90,"diameter":32,"price_retail":33040,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-7-0-150квт","name":"КГБ1 32-7.0 (150кВт)","series":"КГБ1","circuits":7,"power_kw":150,"diameter":32,"price_retail":93840,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-7-1-150квт","name":"КГБ1 32-7.1 (150кВт)","series":"КГБ1","circuits":8,"power_kw":150,"diameter":32,"price_retail":94240,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-9-150квт","name":"КГБ1 32-9 (150кВт)","series":"КГБ1","circuits":9,"power_kw":150,"diameter":32,"price_retail":81200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-11-150квт","name":"КГБ1 32-11 (150кВт)","series":"КГБ1","circuits":11,"power_kw":150,"diameter":32,"price_retail":94000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-13-150квт","name":"КГБ1 32-13 (150кВт)","series":"КГБ1","circuits":13,"power_kw":150,"diameter":32,"price_retail":117200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-32-15-150квт","name":"КГБ1 32-15 (150кВт)","series":"КГБ1","circuits":15,"power_kw":150,"diameter":32,"price_retail":130160,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-2-0-140квт","name":"КГБ1 40-2.0 (140кВт)","series":"КГБ1","circuits":2,"power_kw":140,"diameter":40,"price_retail":22720,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-2-0-200квт","name":"КГБ1 40-2.0 (200кВт)","series":"КГБ1","circuits":2,"power_kw":200,"diameter":40,"price_retail":47360,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-2-1-140квт","name":"КГБ1 40-2.1 (140кВт)","series":"КГБ1","circuits":3,"power_kw":140,"diameter":40,"price_retail":23120,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-2-1-200квт","name":"КГБ1 40-2.1 (200кВт)","series":"КГБ1","circuits":3,"power_kw":200,"diameter":40,"price_retail":47760,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-140квт","name":"КГБ1 40-3 (140кВт)","series":"КГБ1","circuits":3,"power_kw":140,"diameter":40,"price_retail":21160,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-200квт","name":"КГБ1 40-3 (200кВт)","series":"КГБ1","circuits":3,"power_kw":200,"diameter":40,"price_retail":44960,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-0-140квт","name":"КГБ1 40-3.0 (140кВт)","series":"КГБ1","circuits":3,"power_kw":140,"diameter":40,"price_retail":27000,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-0-200квт","name":"КГБ1 40-3.0 (200кВт)","series":"КГБ1","circuits":3,"power_kw":200,"diameter":40,"price_retail":55520,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-1-140квт","name":"КГБ1 40-3.1 (140кВт)","series":"КГБ1","circuits":4,"power_kw":140,"diameter":40,"price_retail":27400,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-3-1-200квт","name":"КГБ1 40-3.1 (200кВт)","series":"КГБ1","circuits":4,"power_kw":200,"diameter":40,"price_retail":55920,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-4-0-140квт","name":"КГБ1 40-4.0 (140кВт)","series":"КГБ1","circuits":4,"power_kw":140,"diameter":40,"price_retail":33280,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-4-0-200квт","name":"КГБ1 40-4.0 (200кВт)","series":"КГБ1","circuits":4,"power_kw":200,"diameter":40,"price_retail":63680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-4-1-140квт","name":"КГБ1 40-4.1 (140кВт)","series":"КГБ1","circuits":5,"power_kw":140,"diameter":40,"price_retail":33680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-4-1-200квт","name":"КГБ1 40-4.1 (200кВт)","series":"КГБ1","circuits":5,"power_kw":200,"diameter":40,"price_retail":64080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-140квт","name":"КГБ1 40-5 (140кВт)","series":"КГБ1","circuits":5,"power_kw":140,"diameter":40,"price_retail":28000,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-200квт","name":"КГБ1 40-5 (200кВт)","series":"КГБ1","circuits":5,"power_kw":200,"diameter":40,"price_retail":58560,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-0-140квт","name":"КГБ1 40-5.0 (140кВт)","series":"КГБ1","circuits":5,"power_kw":140,"diameter":40,"price_retail":37680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-0-200квт","name":"КГБ1 40-5.0 (200кВт)","series":"КГБ1","circuits":5,"power_kw":200,"diameter":40,"price_retail":71840,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-1-140квт","name":"КГБ1 40-5.1 (140кВт)","series":"КГБ1","circuits":6,"power_kw":140,"diameter":40,"price_retail":38080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-5-1-200квт","name":"КГБ1 40-5.1 (200кВт)","series":"КГБ1","circuits":6,"power_kw":200,"diameter":40,"price_retail":72240,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-6-0-200квт","name":"КГБ1 40-6.0 (200кВт)","series":"КГБ1","circuits":6,"power_kw":200,"diameter":40,"price_retail":80640,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-6-1-200квт","name":"КГБ1 40-6.1 (200кВт)","series":"КГБ1","circuits":7,"power_kw":200,"diameter":40,"price_retail":81040,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-7-140квт","name":"КГБ1 40-7 (140кВт)","series":"КГБ1","circuits":7,"power_kw":140,"diameter":40,"price_retail":36320,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-7-200квт","name":"КГБ1 40-7 (200кВт)","series":"КГБ1","circuits":7,"power_kw":200,"diameter":40,"price_retail":72080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-7-0-200квт","name":"КГБ1 40-7.0 (200кВт)","series":"КГБ1","circuits":7,"power_kw":200,"diameter":40,"price_retail":48240,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-7-1-200квт","name":"КГБ1 40-7.1 (200кВт)","series":"КГБ1","circuits":8,"power_kw":200,"diameter":40,"price_retail":99440,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-9-200квт","name":"КГБ1 40-9 (200кВт)","series":"КГБ1","circuits":9,"power_kw":200,"diameter":40,"price_retail":85680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-11-200квт","name":"КГБ1 40-11 (200кВт)","series":"КГБ1","circuits":11,"power_kw":200,"diameter":40,"price_retail":99200,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-13-200квт","name":"КГБ1 40-13 (200кВт)","series":"КГБ1","circuits":13,"power_kw":200,"diameter":40,"price_retail":123600,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-40-15-200квт","name":"КГБ1 40-15 (200кВт)","series":"КГБ1","circuits":15,"power_kw":200,"diameter":40,"price_retail":137200,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-2-0-260квт","name":"КГБ1 50-2.0 (260кВт)","series":"КГБ1","circuits":2,"power_kw":260,"diameter":50,"price_retail":48800,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-2-1-260квт","name":"КГБ1 50-2.1 (260кВт)","series":"КГБ1","circuits":3,"power_kw":260,"diameter":50,"price_retail":49200,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-3-260квт","name":"КГБ1 50-3 (260кВт)","series":"КГБ1","circuits":3,"power_kw":260,"diameter":50,"price_retail":46320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-3-0-260квт","name":"КГБ1 50-3.0 (260кВт)","series":"КГБ1","circuits":3,"power_kw":260,"diameter":50,"price_retail":56800,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-3-1-260квт","name":"КГБ1 50-3.1 (260кВт)","series":"КГБ1","circuits":4,"power_kw":260,"diameter":50,"price_retail":57200,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-4-0-260квт","name":"КГБ1 50-4.0 (260кВт)","series":"КГБ1","circuits":4,"power_kw":260,"diameter":50,"price_retail":64960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-4-1-260квт","name":"КГБ1 50-4.1 (260кВт)","series":"КГБ1","circuits":5,"power_kw":260,"diameter":50,"price_retail":65360,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-5-260квт","name":"КГБ1 50-5 (260кВт)","series":"КГБ1","circuits":5,"power_kw":260,"diameter":50,"price_retail":59840,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-5-0-260квт","name":"КГБ1 50-5.0 (260кВт)","series":"КГБ1","circuits":5,"power_kw":260,"diameter":50,"price_retail":73120,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-5-1-260квт","name":"КГБ1 50-5.1 (260кВт)","series":"КГБ1","circuits":6,"power_kw":260,"diameter":50,"price_retail":73520,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-6-0-260квт","name":"КГБ1 50-6.0 (260кВт)","series":"КГБ1","circuits":6,"power_kw":260,"diameter":50,"price_retail":81920,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-6-1-260квт","name":"КГБ1 50-6.1 (260кВт)","series":"КГБ1","circuits":7,"power_kw":260,"diameter":50,"price_retail":82320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-7-260квт","name":"КГБ1 50-7 (260кВт)","series":"КГБ1","circuits":7,"power_kw":260,"diameter":50,"price_retail":73440,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-7-0-260квт","name":"КГБ1 50-7.0 (260кВт)","series":"КГБ1","circuits":7,"power_kw":260,"diameter":50,"price_retail":100320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-7-1-260квт","name":"КГБ1 50-7.1 (260кВт)","series":"КГБ1","circuits":8,"power_kw":260,"diameter":50,"price_retail":100720,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-9-260квт","name":"КГБ1 50-9 (260кВт)","series":"КГБ1","circuits":9,"power_kw":260,"diameter":50,"price_retail":86960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-11-260квт","name":"КГБ1 50-11 (260кВт)","series":"КГБ1","circuits":11,"power_kw":260,"diameter":50,"price_retail":110720,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-13-260квт","name":"КГБ1 50-13 (260кВт)","series":"КГБ1","circuits":13,"power_kw":260,"diameter":50,"price_retail":124960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгб1-50-15-260квт","name":"КГБ1 50-15 (260кВт)","series":"КГБ1","circuits":15,"power_kw":260,"diameter":50,"price_retail":138480,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-2-0-65квт","name":"КГК1 25-2.0 (65кВт)","series":"КГК1","circuits":2,"power_kw":65,"diameter":25,"price_retail":20720,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-2-1-65квт","name":"КГК1 25-2.1 (65кВт)","series":"КГК1","circuits":3,"power_kw":65,"diameter":25,"price_retail":21120,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-65квт","name":"КГК1 25-3 (65кВт)","series":"КГК1","circuits":3,"power_kw":65,"diameter":25,"price_retail":19160,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-0-65квт","name":"КГК1 25-3.0 (65кВт)","series":"КГК1","circuits":3,"power_kw":65,"diameter":25,"price_retail":25000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-1-65квт","name":"КГК1 25-3.1 (65кВт)","series":"КГК1","circuits":4,"power_kw":65,"diameter":25,"price_retail":25400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-4-0-65квт","name":"КГК1 25-4.0 (65кВт)","series":"КГК1","circuits":4,"power_kw":65,"diameter":25,"price_retail":30400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-4-1-65квт","name":"КГК1 25-4.1 (65кВт)","series":"КГК1","circuits":5,"power_kw":65,"diameter":25,"price_retail":30800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-65квт","name":"КГК1 25-5 (65кВт)","series":"КГК1","circuits":5,"power_kw":65,"diameter":25,"price_retail":26000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-0-65квт","name":"КГК1 25-5.0 (65кВт)","series":"КГК1","circuits":5,"power_kw":65,"diameter":25,"price_retail":34800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-1-65квт","name":"КГК1 25-5.1 (65кВт)","series":"КГК1","circuits":6,"power_kw":65,"diameter":25,"price_retail":35200,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-6-0-125квт","name":"КГК1 25-6.0 (125кВт)","series":"КГК1","circuits":6,"power_kw":125,"diameter":25,"price_retail":76800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-6-1-125квт","name":"КГК1 25-6.1 (125кВт)","series":"КГК1","circuits":7,"power_kw":125,"diameter":25,"price_retail":77200,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-65квт","name":"КГК1 25-7 (65кВт)","series":"КГК1","circuits":7,"power_kw":65,"diameter":25,"price_retail":33440,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-0-125квт","name":"КГК1 25-7.0 (125кВт)","series":"КГК1","circuits":7,"power_kw":125,"diameter":25,"price_retail":93360,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-1-125квт","name":"КГК1 25-7.1 (125кВт)","series":"КГК1","circuits":8,"power_kw":125,"diameter":25,"price_retail":93760,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-9-125квт","name":"КГК1 25-9 (125кВт)","series":"КГК1","circuits":9,"power_kw":125,"diameter":25,"price_retail":81440,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-11-125квт","name":"КГК1 25-11 (125кВт)","series":"КГК1","circuits":11,"power_kw":125,"diameter":25,"price_retail":93600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-13-125квт","name":"КГК1 25-13 (125кВт)","series":"КГК1","circuits":13,"power_kw":125,"diameter":25,"price_retail":115600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-15-125квт","name":"КГК1 25-15 (125кВт)","series":"КГК1","circuits":15,"power_kw":125,"diameter":25,"price_retail":127800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-2-0-90квт","name":"КГК1 32-2.0 (90кВт)","series":"КГК1","circuits":2,"power_kw":90,"diameter":32,"price_retail":22720,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-2-1-90квт","name":"КГК1 32-2.1 (90кВт)","series":"КГК1","circuits":3,"power_kw":90,"diameter":32,"price_retail":23120,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-90квт","name":"КГК1 32-3 (90кВт)","series":"КГК1","circuits":3,"power_kw":90,"diameter":32,"price_retail":21120,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-0-90квт","name":"КГК1 32-3.0 (90кВт)","series":"КГК1","circuits":3,"power_kw":90,"diameter":32,"price_retail":27000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-1-90квт","name":"КГК1 32-3.1 (90кВт)","series":"КГК1","circuits":4,"power_kw":90,"diameter":32,"price_retail":27400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-4-0-90квт","name":"КГК1 32-4.0 (90кВт)","series":"КГК1","circuits":4,"power_kw":90,"diameter":32,"price_retail":32400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-4-1-90квт","name":"КГК1 32-4.1 (90кВт)","series":"КГК1","circuits":5,"power_kw":90,"diameter":32,"price_retail":32800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-90квт","name":"КГК1 32-5 (90кВт)","series":"КГК1","circuits":5,"power_kw":90,"diameter":32,"price_retail":28000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-0-90квт","name":"КГК1 32-5.0 (90кВт)","series":"КГК1","circuits":5,"power_kw":90,"diameter":32,"price_retail":36800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-1-90квт","name":"КГК1 32-5.1 (90кВт)","series":"КГК1","circuits":6,"power_kw":90,"diameter":32,"price_retail":37200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-6-0-150квт","name":"КГК1 32-6.0 (150кВт)","series":"КГК1","circuits":6,"power_kw":150,"diameter":32,"price_retail":81200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-6-1-150квт","name":"КГК1 32-6.1 (150кВт)","series":"КГК1","circuits":7,"power_kw":150,"diameter":32,"price_retail":81600,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-90квт","name":"КГК1 32-7 (90кВт)","series":"КГК1","circuits":7,"power_kw":90,"diameter":32,"price_retail":35440,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-0-150квт","name":"КГК1 32-7.0 (150кВт)","series":"КГК1","circuits":7,"power_kw":150,"diameter":32,"price_retail":98640,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-1-150квт","name":"КГК1 32-7.1 (150кВт)","series":"КГК1","circuits":8,"power_kw":150,"diameter":32,"price_retail":99040,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-9-150квт","name":"КГК1 32-9 (150кВт)","series":"КГК1","circuits":9,"power_kw":150,"diameter":32,"price_retail":86000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-11-150квт","name":"КГК1 32-11 (150кВт)","series":"КГК1","circuits":11,"power_kw":150,"diameter":32,"price_retail":98800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-13-150квт","name":"КГК1 32-13 (150кВт)","series":"КГК1","circuits":13,"power_kw":150,"diameter":32,"price_retail":122000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-15-150квт","name":"КГК1 32-15 (150кВт)","series":"КГК1","circuits":15,"power_kw":150,"diameter":32,"price_retail":134960,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-0-140квт","name":"КГК1 40-2.0 (140кВт)","series":"КГК1","circuits":2,"power_kw":140,"diameter":40,"price_retail":25120,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-0-200квт","name":"КГК1 40-2.0 (200кВт)","series":"КГК1","circuits":2,"power_kw":200,"diameter":40,"price_retail":52160,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-1-140квт","name":"КГК1 40-2.1 (140кВт)","series":"КГК1","circuits":3,"power_kw":140,"diameter":40,"price_retail":25520,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-1-200квт","name":"КГК1 40-2.1 (200кВт)","series":"КГК1","circuits":3,"power_kw":200,"diameter":40,"price_retail":52560,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-140квт","name":"КГК1 40-3 (140кВт)","series":"КГК1","circuits":3,"power_kw":140,"diameter":40,"price_retail":23560,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-200квт","name":"КГК1 40-3 (200кВт)","series":"КГК1","circuits":3,"power_kw":200,"diameter":40,"price_retail":49760,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-0-140квт","name":"КГК1 40-3.0 (140кВт)","series":"КГК1","circuits":3,"power_kw":140,"diameter":40,"price_retail":29400,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-0-200квт","name":"КГК1 40-3.0 (200кВт)","series":"КГК1","circuits":3,"power_kw":200,"diameter":40,"price_retail":60320,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-1-140квт","name":"КГК1 40-3.1 (140кВт)","series":"КГК1","circuits":4,"power_kw":140,"diameter":40,"price_retail":29800,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-1-200квт","name":"КГК1 40-3.1 (200кВт)","series":"КГК1","circuits":4,"power_kw":200,"diameter":40,"price_retail":60720,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-0-140квт","name":"КГК1 40-4.0 (140кВт)","series":"КГК1","circuits":4,"power_kw":140,"diameter":40,"price_retail":35680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-0-200квт","name":"КГК1 40-4.0 (200кВт)","series":"КГК1","circuits":4,"power_kw":200,"diameter":40,"price_retail":68480,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-1-140квт","name":"КГК1 40-4.1 (140кВт)","series":"КГК1","circuits":5,"power_kw":140,"diameter":40,"price_retail":36080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-1-200квт","name":"КГК1 40-4.1 (200кВт)","series":"КГК1","circuits":5,"power_kw":200,"diameter":40,"price_retail":68880,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-140квт","name":"КГК1 40-5 (140кВт)","series":"КГК1","circuits":5,"power_kw":140,"diameter":40,"price_retail":30400,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-200квт","name":"КГК1 40-5 (200кВт)","series":"КГК1","circuits":5,"power_kw":200,"diameter":40,"price_retail":63360,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-0-140квт","name":"КГК1 40-5.0 (140кВт)","series":"КГК1","circuits":5,"power_kw":140,"diameter":40,"price_retail":40080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-0-200квт","name":"КГК1 40-5.0 (200кВт)","series":"КГК1","circuits":5,"power_kw":200,"diameter":40,"price_retail":76640,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-1-140квт","name":"КГК1 40-5.1 (140кВт)","series":"КГК1","circuits":6,"power_kw":140,"diameter":40,"price_retail":40480,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-1-200квт","name":"КГК1 40-5.1 (200кВт)","series":"КГК1","circuits":6,"power_kw":200,"diameter":40,"price_retail":77040,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-6-0-200квт","name":"КГК1 40-6.0 (200кВт)","series":"КГК1","circuits":6,"power_kw":200,"diameter":40,"price_retail":85440,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-6-1-200квт","name":"КГК1 40-6.1 (200кВт)","series":"КГК1","circuits":7,"power_kw":200,"diameter":40,"price_retail":85840,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-140квт","name":"КГК1 40-7 (140кВт)","series":"КГК1","circuits":7,"power_kw":140,"diameter":40,"price_retail":38720,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-200квт","name":"КГК1 40-7 (200кВт)","series":"КГК1","circuits":7,"power_kw":200,"diameter":40,"price_retail":76880,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-0-200квт","name":"КГК1 40-7.0 (200кВт)","series":"КГК1","circuits":7,"power_kw":200,"diameter":40,"price_retail":53040,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-1-200квт","name":"КГК1 40-7.1 (200кВт)","series":"КГК1","circuits":8,"power_kw":200,"diameter":40,"price_retail":104240,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-9-200квт","name":"КГК1 40-9 (200кВт)","series":"КГК1","circuits":9,"power_kw":200,"diameter":40,"price_retail":90480,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-11-200квт","name":"КГК1 40-11 (200кВт)","series":"КГК1","circuits":11,"power_kw":200,"diameter":40,"price_retail":104000,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-13-200квт","name":"КГК1 40-13 (200кВт)","series":"КГК1","circuits":13,"power_kw":200,"diameter":40,"price_retail":128400,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-15-200квт","name":"КГК1 40-15 (200кВт)","series":"КГК1","circuits":15,"power_kw":200,"diameter":40,"price_retail":142000,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-2-0-260квт","name":"КГК1 50-2.0 (260кВт)","series":"КГК1","circuits":2,"power_kw":260,"diameter":50,"price_retail":56000,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-2-1-260квт","name":"КГК1 50-2.1 (260кВт)","series":"КГК1","circuits":3,"power_kw":260,"diameter":50,"price_retail":56400,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-260квт","name":"КГК1 50-3 (260кВт)","series":"КГК1","circuits":3,"power_kw":260,"diameter":50,"price_retail":53520,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-0-260квт","name":"КГК1 50-3.0 (260кВт)","series":"КГК1","circuits":3,"power_kw":260,"diameter":50,"price_retail":64000,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-1-260квт","name":"КГК1 50-3.1 (260кВт)","series":"КГК1","circuits":4,"power_kw":260,"diameter":50,"price_retail":64400,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-4-0-260квт","name":"КГК1 50-4.0 (260кВт)","series":"КГК1","circuits":4,"power_kw":260,"diameter":50,"price_retail":72160,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-4-1-260квт","name":"КГК1 50-4.1 (260кВт)","series":"КГК1","circuits":5,"power_kw":260,"diameter":50,"price_retail":72560,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-260квт","name":"КГК1 50-5 (260кВт)","series":"КГК1","circuits":5,"power_kw":260,"diameter":50,"price_retail":67040,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-0-260квт","name":"КГК1 50-5.0 (260кВт)","series":"КГК1","circuits":5,"power_kw":260,"diameter":50,"price_retail":80320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-1-260квт","name":"КГК1 50-5.1 (260кВт)","series":"КГК1","circuits":6,"power_kw":260,"diameter":50,"price_retail":80720,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-6-0-260квт","name":"КГК1 50-6.0 (260кВт)","series":"КГК1","circuits":6,"power_kw":260,"diameter":50,"price_retail":89120,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-6-1-260квт","name":"КГК1 50-6.1 (260кВт)","series":"КГК1","circuits":7,"power_kw":260,"diameter":50,"price_retail":89520,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-260квт","name":"КГК1 50-7 (260кВт)","series":"КГК1","circuits":7,"power_kw":260,"diameter":50,"price_retail":80640,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-0-260квт","name":"КГК1 50-7.0 (260кВт)","series":"КГК1","circuits":7,"power_kw":260,"diameter":50,"price_retail":107520,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-1-260квт","name":"КГК1 50-7.1 (260кВт)","series":"КГК1","circuits":8,"power_kw":260,"diameter":50,"price_retail":107920,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-9-260квт","name":"КГК1 50-9 (260кВт)","series":"КГК1","circuits":9,"power_kw":260,"diameter":50,"price_retail":94160,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-11-260квт","name":"КГК1 50-11 (260кВт)","series":"КГК1","circuits":11,"power_kw":260,"diameter":50,"price_retail":117920,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-13-260квт","name":"КГК1 50-13 (260кВт)","series":"КГК1","circuits":13,"power_kw":260,"diameter":50,"price_retail":132160,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-15-260квт","name":"КГК1 50-15 (260кВт)","series":"КГК1","circuits":15,"power_kw":260,"diameter":50,"price_retail":145680,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-2-0-65квт-д","name":"КГК1 25-2.0 (65кВт)Д","series":"КГК1-Д","circuits":2,"power_kw":65,"diameter":25,"price_retail":23120,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-2-1-65квт-д","name":"КГК1 25-2.1 (65кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":65,"diameter":25,"price_retail":23520,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-65квт-д","name":"КГК1 25-3 (65кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":65,"diameter":25,"price_retail":21560,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-0-65квт-д","name":"КГК1 25-3.0 (65кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":65,"diameter":25,"price_retail":27400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-3-1-65квт-д","name":"КГК1 25-3.1 (65кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":65,"diameter":25,"price_retail":27800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-4-0-65квт-д","name":"КГК1 25-4.0 (65кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":65,"diameter":25,"price_retail":32800,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-4-1-65квт-д","name":"КГК1 25-4.1 (65кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":65,"diameter":25,"price_retail":33200,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-65квт-д","name":"КГК1 25-5 (65кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":65,"diameter":25,"price_retail":28400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-0-65квт-д","name":"КГК1 25-5.0 (65кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":65,"diameter":25,"price_retail":37200,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-5-1-65квт-д","name":"КГК1 25-5.1 (65кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":65,"diameter":25,"price_retail":37600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-6-0-125квт-д","name":"КГК1 25-6.0 (125кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":125,"diameter":25,"price_retail":81600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-6-1-125квт-д","name":"КГК1 25-6.1 (125кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":125,"diameter":25,"price_retail":82000,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-65квт-д","name":"КГК1 25-7 (65кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":65,"diameter":25,"price_retail":35840,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-0-125квт-д","name":"КГК1 25-7.0 (125кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":125,"diameter":25,"price_retail":98160,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-7-1-125квт-д","name":"КГК1 25-7.1 (125кВт)Д","series":"КГК1-Д","circuits":8,"power_kw":125,"diameter":25,"price_retail":98560,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-9-125квт-д","name":"КГК1 25-9 (125кВт)Д","series":"КГК1-Д","circuits":9,"power_kw":125,"diameter":25,"price_retail":86240,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-11-125квт-д","name":"КГК1 25-11 (125кВт)Д","series":"КГК1-Д","circuits":11,"power_kw":125,"diameter":25,"price_retail":98400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-13-125квт-д","name":"КГК1 25-13 (125кВт)Д","series":"КГК1-Д","circuits":13,"power_kw":125,"diameter":25,"price_retail":120400,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-25-15-125квт-д","name":"КГК1 25-15 (125кВт)Д","series":"КГК1-Д","circuits":15,"power_kw":125,"diameter":25,"price_retail":132600,"conn_source":"1\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-2-0-90квт-д","name":"КГК1 32-2.0 (90кВт)Д","series":"КГК1-Д","circuits":2,"power_kw":90,"diameter":32,"price_retail":25120,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-2-1-90квт-д","name":"КГК1 32-2.1 (90кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":90,"diameter":32,"price_retail":25520,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-90квт-д","name":"КГК1 32-3 (90кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":90,"diameter":32,"price_retail":23520,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-0-90квт-д","name":"КГК1 32-3.0 (90кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":90,"diameter":32,"price_retail":29400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-3-1-90квт-д","name":"КГК1 32-3.1 (90кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":90,"diameter":32,"price_retail":29800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-4-0-90квт-д","name":"КГК1 32-4.0 (90кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":90,"diameter":32,"price_retail":34800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-4-1-90квт-д","name":"КГК1 32-4.1 (90кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":90,"diameter":32,"price_retail":35200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-90квт-д","name":"КГК1 32-5 (90кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":90,"diameter":32,"price_retail":30400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-0-90квт-д","name":"КГК1 32-5.0 (90кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":90,"diameter":32,"price_retail":39200,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-5-1-90квт-д","name":"КГК1 32-5.1 (90кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":90,"diameter":32,"price_retail":39600,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-6-0-150квт-д","name":"КГК1 32-6.0 (150кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":150,"diameter":32,"price_retail":86000,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-6-1-150квт-д","name":"КГК1 32-6.1 (150кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":150,"diameter":32,"price_retail":86400,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-90квт-д","name":"КГК1 32-7 (90кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":90,"diameter":32,"price_retail":37840,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-0-150квт-д","name":"КГК1 32-7.0 (150кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":150,"diameter":32,"price_retail":103440,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-7-1-150квт-д","name":"КГК1 32-7.1 (150кВт)Д","series":"КГК1-Д","circuits":8,"power_kw":150,"diameter":32,"price_retail":103840,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-9-150квт-д","name":"КГК1 32-9 (150кВт)Д","series":"КГК1-Д","circuits":9,"power_kw":150,"diameter":32,"price_retail":90800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-11-150квт-д","name":"КГК1 32-11 (150кВт)Д","series":"КГК1-Д","circuits":11,"power_kw":150,"diameter":32,"price_retail":103600,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-13-150квт-д","name":"КГК1 32-13 (150кВт)Д","series":"КГК1-Д","circuits":13,"power_kw":150,"diameter":32,"price_retail":126800,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-32-15-150квт-д","name":"КГК1 32-15 (150кВт)Д","series":"КГК1-Д","circuits":15,"power_kw":150,"diameter":32,"price_retail":139760,"conn_source":"1 1/4\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-0-140квт-д","name":"КГК1 40-2.0 (140кВт)Д","series":"КГК1-Д","circuits":2,"power_kw":140,"diameter":40,"price_retail":27520,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-0-200квт-д","name":"КГК1 40-2.0 (200кВт)Д","series":"КГК1-Д","circuits":2,"power_kw":200,"diameter":40,"price_retail":56960,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-1-140квт-д","name":"КГК1 40-2.1 (140кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":140,"diameter":40,"price_retail":27920,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-2-1-200квт-д","name":"КГК1 40-2.1 (200кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":200,"diameter":40,"price_retail":57360,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-140квт-д","name":"КГК1 40-3 (140кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":140,"diameter":40,"price_retail":25960,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-200квт-д","name":"КГК1 40-3 (200кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":200,"diameter":40,"price_retail":54560,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-0-140квт-д","name":"КГК1 40-3.0 (140кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":140,"diameter":40,"price_retail":31800,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-0-200квт-д","name":"КГК1 40-3.0 (200кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":200,"diameter":40,"price_retail":65120,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-1-140квт-д","name":"КГК1 40-3.1 (140кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":140,"diameter":40,"price_retail":32200,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-3-1-200квт-д","name":"КГК1 40-3.1 (200кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":200,"diameter":40,"price_retail":65520,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-0-140квт-д","name":"КГК1 40-4.0 (140кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":140,"diameter":40,"price_retail":38080,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-0-200квт-д","name":"КГК1 40-4.0 (200кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":200,"diameter":40,"price_retail":73280,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-1-140квт-д","name":"КГК1 40-4.1 (140кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":140,"diameter":40,"price_retail":38480,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-4-1-200квт-д","name":"КГК1 40-4.1 (200кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":200,"diameter":40,"price_retail":73680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-140квт-д","name":"КГК1 40-5 (140кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":140,"diameter":40,"price_retail":32800,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-200квт-д","name":"КГК1 40-5 (200кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":200,"diameter":40,"price_retail":68160,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-0-140квт-д","name":"КГК1 40-5.0 (140кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":140,"diameter":40,"price_retail":42480,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-0-200квт-д","name":"КГК1 40-5.0 (200кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":200,"diameter":40,"price_retail":81440,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-1-140квт-д","name":"КГК1 40-5.1 (140кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":140,"diameter":40,"price_retail":42880,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-5-1-200квт-д","name":"КГК1 40-5.1 (200кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":200,"diameter":40,"price_retail":81840,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-6-0-200квт-д","name":"КГК1 40-6.0 (200кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":200,"diameter":40,"price_retail":90240,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-6-1-200квт-д","name":"КГК1 40-6.1 (200кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":200,"diameter":40,"price_retail":90640,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-140квт-д","name":"КГК1 40-7 (140кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":140,"diameter":40,"price_retail":41120,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-200квт-д","name":"КГК1 40-7 (200кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":200,"diameter":40,"price_retail":81680,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-0-200квт-д","name":"КГК1 40-7.0 (200кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":200,"diameter":40,"price_retail":57840,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-7-1-200квт-д","name":"КГК1 40-7.1 (200кВт)Д","series":"КГК1-Д","circuits":8,"power_kw":200,"diameter":40,"price_retail":109040,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-9-200квт-д","name":"КГК1 40-9 (200кВт)Д","series":"КГК1-Д","circuits":9,"power_kw":200,"diameter":40,"price_retail":95280,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-11-200квт-д","name":"КГК1 40-11 (200кВт)Д","series":"КГК1-Д","circuits":11,"power_kw":200,"diameter":40,"price_retail":108800,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-13-200квт-д","name":"КГК1 40-13 (200кВт)Д","series":"КГК1-Д","circuits":13,"power_kw":200,"diameter":40,"price_retail":133200,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-40-15-200квт-д","name":"КГК1 40-15 (200кВт)Д","series":"КГК1-Д","circuits":15,"power_kw":200,"diameter":40,"price_retail":146800,"conn_source":"1 1/2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-2-0-260квт-д","name":"КГК1 50-2.0 (260кВт)Д","series":"КГК1-Д","circuits":2,"power_kw":260,"diameter":50,"price_retail":60800,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-2-1-260квт-д","name":"КГК1 50-2.1 (260кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":260,"diameter":50,"price_retail":61200,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-260квт-д","name":"КГК1 50-3 (260кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":260,"diameter":50,"price_retail":58320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-0-260квт-д","name":"КГК1 50-3.0 (260кВт)Д","series":"КГК1-Д","circuits":3,"power_kw":260,"diameter":50,"price_retail":68800,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-3-1-260квт-д","name":"КГК1 50-3.1 (260кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":260,"diameter":50,"price_retail":69200,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-4-0-260квт-д","name":"КГК1 50-4.0 (260кВт)Д","series":"КГК1-Д","circuits":4,"power_kw":260,"diameter":50,"price_retail":76960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-4-1-260квт-д","name":"КГК1 50-4.1 (260кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":260,"diameter":50,"price_retail":77360,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-260квт-д","name":"КГК1 50-5 (260кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":260,"diameter":50,"price_retail":71840,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-0-260квт-д","name":"КГК1 50-5.0 (260кВт)Д","series":"КГК1-Д","circuits":5,"power_kw":260,"diameter":50,"price_retail":85120,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-5-1-260квт-д","name":"КГК1 50-5.1 (260кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":260,"diameter":50,"price_retail":85520,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-6-0-260квт-д","name":"КГК1 50-6.0 (260кВт)Д","series":"КГК1-Д","circuits":6,"power_kw":260,"diameter":50,"price_retail":93920,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-6-1-260квт-д","name":"КГК1 50-6.1 (260кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":260,"diameter":50,"price_retail":94320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-260квт-д","name":"КГК1 50-7 (260кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":260,"diameter":50,"price_retail":85440,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-0-260квт-д","name":"КГК1 50-7.0 (260кВт)Д","series":"КГК1-Д","circuits":7,"power_kw":260,"diameter":50,"price_retail":112320,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-7-1-260квт-д","name":"КГК1 50-7.1 (260кВт)Д","series":"КГК1-Д","circuits":8,"power_kw":260,"diameter":50,"price_retail":112720,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-9-260квт-д","name":"КГК1 50-9 (260кВт)Д","series":"КГК1-Д","circuits":9,"power_kw":260,"diameter":50,"price_retail":98960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-11-260квт-д","name":"КГК1 50-11 (260кВт)Д","series":"КГК1-Д","circuits":11,"power_kw":260,"diameter":50,"price_retail":122720,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-13-260квт-д","name":"КГК1 50-13 (260кВт)Д","series":"КГК1-Д","circuits":13,"power_kw":260,"diameter":50,"price_retail":136960,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кгк1-50-15-260квт-д","name":"КГК1 50-15 (260кВт)Д","series":"КГК1-Д","circuits":15,"power_kw":260,"diameter":50,"price_retail":150480,"conn_source":"2\" (н/р)","conn_consumer":"1\" (н/р)"},{"id":"кг1-20-н-р-1-35квт","name":"КГ1 20(Н.Р)-1(35кВт)","series":"КГ1","circuits":1,"power_kw":35,"diameter":20,"price_retail":7160,"conn_source":null,"conn_consumer":null},{"id":"кг1-20-н-р-2-35квт","name":"КГ1 20(Н.Р)-2(35кВт)","series":"КГ1","circuits":2,"power_kw":35,"diameter":20,"price_retail":8160,"conn_source":null,"conn_consumer":null},{"id":"кг1-25-н-р-1-65квт","name":"КГ1 25(Н.Р)-1(65кВт)","series":"КГ1","circuits":1,"power_kw":65,"diameter":25,"price_retail":7920,"conn_source":null,"conn_consumer":null},{"id":"кг1-25-н-р-2-65квт","name":"КГ1 25(Н.Р)-2(65кВт)","series":"КГ1","circuits":2,"power_kw":65,"diameter":25,"price_retail":10520,"conn_source":null,"conn_consumer":null},{"id":"кг1-25-н-р-3-65квт","name":"КГ1 25(Н.Р)-3(65кВт)","series":"КГ1","circuits":3,"power_kw":65,"diameter":25,"price_retail":14520,"conn_source":null,"conn_consumer":null},{"id":"кг1-32-н-р-1-90квт","name":"КГ1 32(Н.Р)-1(90кВт)","series":"КГ1","circuits":1,"power_kw":90,"diameter":32,"price_retail":8160,"conn_source":null,"conn_consumer":null},{"id":"кг1-32-н-р-2-90квт","name":"КГ1 32(Н.Р)-2(90кВт)","series":"КГ1","circuits":2,"power_kw":90,"diameter":32,"price_retail":10560,"conn_source":null,"conn_consumer":null},{"id":"кг1-32-н-р-3-90квт","name":"КГ1 32(Н.Р)-3(90кВт)","series":"КГ1","circuits":3,"power_kw":90,"diameter":32,"price_retail":15200,"conn_source":null,"conn_consumer":null},{"id":"кг1-40-н-р-1-140квт","name":"КГ1 40(Н.Р)-1(140кВт)","series":"КГ1","circuits":1,"power_kw":140,"diameter":40,"price_retail":10800,"conn_source":null,"conn_consumer":null},{"id":"кг1-50-н-р-1-250квт","name":"КГ1 50(Н.Р)-1(250кВт)","series":"КГ1","circuits":1,"power_kw":250,"diameter":50,"price_retail":37280,"conn_source":null,"conn_consumer":null}]</script>
+
+<div class="funnel">
+  <div class="wrap funnel-layout">
+    <div>
+      <!-- Step 1 -->
+      <div class="step-panel active" id="step1">
+        <h2>Какой тип изделия нужен?</h2>
+        <p class="sub">Если не уверены — выбирайте КГБ1, это универсальный вариант для большинства систем отопления.</p>
+        <div class="option-grid">
+          <div class="opt-card" data-series="КГБ1">
+            <div class="onum">КГБ1</div>
+            <div class="olabel">С байпасом — универсальный. Для большинства систем с несколькими контурами</div>
+          </div>
+          <div class="opt-card" data-series="КГК1">
+            <div class="onum">КГК1</div>
+            <div class="olabel">Без байпаса — когда байпас реализован внешней схемой или не нужен</div>
+          </div>
+          <div class="opt-card" data-series="КГК1-Д">
+            <div class="onum">КГК1-Д</div>
+            <div class="olabel">С дренажным краном — удобно для периодического слива системы</div>
+          </div>
+          <div class="opt-card" data-series="КГ1">
+            <div class="onum">КГ1</div>
+            <div class="olabel">Компактная, наружная резьба — ограниченное пространство, малая мощность</div>
+          </div>
+        </div>
+        <div class="step-actions">
+          <span></span>
+          <button class="btn btn-primary" id="to-step2" disabled>Мощность →</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-panel" id="step2">
+        <h2>Тепловая мощность системы</h2>
+        <p class="sub">Суммарная мощность источника тепла. Берите с запасом 15–20% от расчётной.</p>
+        <div class="range-group">
+          <div class="range-row">
+            <span style="font-size:14px;color:var(--steel);">Мощность (ΔТ-25)</span>
+            <span class="range-val" id="power-val">65 кВт</span>
+          </div>
+          <input type="range" id="power-slider" min="35" max="260" step="5" value="65">
+          <div class="range-ticks"><span>35</span><span>65</span><span>100</span><span>150</span><span>200</span><span>260</span></div>
+        </div>
+        <div class="step-actions">
+          <button class="btn btn-outline" onclick="goStep(1)">← Назад</button>
+          <button class="btn btn-primary" onclick="goStep(3)">Контуры →</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-panel" id="step3">
+        <h2>Количество контуров</h2>
+        <p class="sub">Число отопительных ветвей: тёплый пол, радиаторы, бойлер, ГВС и другие — считайте каждую отдельно.</p>
+        <div class="option-grid" style="grid-template-columns:repeat(4,1fr);" id="circuits-opts"></div>
+        <div class="step-actions">
+          <button class="btn btn-outline" onclick="goStep(2)">← Назад</button>
+          <button class="btn btn-primary" id="to-results" disabled>Показать модели →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul class="step-nav">
+        <li class="active" id="snav1"><span class="snum">1</span>Тип изделия</li>
+        <li id="snav2"><span class="snum">2</span>Мощность</li>
+        <li id="snav3"><span class="snum">3</span>Контуры</li>
+      </ul>
+      <div class="match-box">
+        <div class="mb-label">Совпадений в каталоге</div>
+        <div class="mb-count" id="match-count">—</div>
+        <div class="mb-hint" id="match-hint">Заполните параметры для подбора</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Results -->
+<div class="rec-section" id="rec-section">
+  <div class="wrap">
+    <h2 id="rec-title">Подходящие модели</h2>
+    <p class="rec-sub" id="rec-sub"></p>
+    <div class="rec-grid" id="rec-grid"></div>
+    <div style="text-align:center;">
+      <a href="catalog.html" class="btn btn-outline">Смотреть весь каталог →</a>
+    </div>
+  </div>
+</div>
+
+<!-- No match -->
+<div class="no-match" id="no-match">
+  <div class="wrap">
+    <h3>Точного совпадения нет</h3>
+    <p>Параметры выходят за пределы серийного каталога. Изготовим под заказ с тем же контролем качества.</p>
+    <div class="contact-form">
+      <div class="field"><label>Имя и телефон</label><input type="text" placeholder="Как связаться"></div>
+      <div class="field"><label>Параметры</label><textarea placeholder="Серия, мощность, контуры, DN, особые требования"></textarea></div>
+      <button class="btn btn-copper">Отправить заявку</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison table -->
+<div class="compare-section">
+  <div class="wrap">
+    <span class="tag">Помощь в выборе</span>
+    <h2>Когда какая серия подходит</h2>
+    <p class="cs-sub">Все серии — нержавеющая сталь AISI 304, гарантия 5 лет, 100% опрессовка каждого изделия. Разница только в конфигурации.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Параметр</th>
+          <th>КГБ1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с байпасом</span></th>
+          <th>КГК1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">без байпаса</span></th>
+          <th>КГК1-Д<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с дренажом</span></th>
+          <th>КГ1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">компактная</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Встроенный байпас</td>
+          <td class="hi"><span class="check">✓</span> Есть</td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+        </tr>
+        <tr>
+          <td>Дренажный кран</td>
+          <td><span class="cross">—</span></td>
+          <td><span class="cross">—</span></td>
+          <td class="hi"><span class="check">✓</span> Есть</td>
+          <td><span class="cross">—</span></td>
+        </tr>
+        <tr>
+          <td>Тип резьбы</td>
+          <td>Внутренняя</td>
+          <td>Внутренняя</td>
+          <td>Внутренняя</td>
+          <td class="hi">Наружная</td>
+        </tr>
+        <tr>
+          <td>DN подключения</td>
+          <td>25 / 32 / 40 / 50</td>
+          <td>25 / 32 / 40 / 50</td>
+          <td>25 / 32 / 40 / 50</td>
+          <td class="hi">20 / 25 / 32 / 40 / 50</td>
+        </tr>
+        <tr>
+          <td>Мощность (ΔТ-25)</td>
+          <td>65–260 кВт</td>
+          <td>65–260 кВт</td>
+          <td>65–260 кВт</td>
+          <td class="hi">35–250 кВт</td>
+        </tr>
+        <tr>
+          <td>Контуры</td>
+          <td>2–15</td>
+          <td>2–15</td>
+          <td>2–15</td>
+          <td class="hi">1–9</td>
+        </tr>
+        <tr>
+          <td>Когда выбирать</td>
+          <td>Большинство многоконтурных систем — универсальный выбор</td>
+          <td>Байпас не нужен или реализован во внешней схеме</td>
+          <td>Нужен удобный слив без отключения системы</td>
+          <td>Малая мощность, ограниченное пространство, наружная резьба</td>
+        </tr>
+        <tr>
+          <td>Гарантия</td>
+          <td colspan="4" style="text-align:center;color:var(--steel);">5 лет · AISI 304 · 100% гидравлическая опрессовка</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
+    <span>ИНН 0000000000 · ISO 9001:2015</span>
+  </div>
+</footer>
+
+<script>
+const ALL = JSON.parse(document.getElementById('product-data').textContent);
+let sel = {series:null,power:65,circuits:null};
+
+function goStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('step'+i).classList.toggle('active',i===n);
+    const li = document.getElementById('snav'+i);
+    li.classList.toggle('active',i===n);
+    li.classList.toggle('done',i<n);
+  });
+  if(n===3) buildCircuits();
+  updateCount();
+}
+
+document.querySelectorAll('.opt-card[data-series]').forEach(c => {
+  c.addEventListener('click',() => {
+    document.querySelectorAll('.opt-card[data-series]').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    sel.series = c.dataset.series;
+    document.getElementById('to-step2').disabled = false;
+    updateCount();
+  });
+});
+document.getElementById('to-step2').addEventListener('click',()=>goStep(2));
+
+const slider = document.getElementById('power-slider');
+slider.addEventListener('input',()=>{
+  sel.power = +slider.value;
+  document.getElementById('power-val').textContent = sel.power+' кВт';
+  updateCount();
+});
+
+function buildCircuits() {
+  const avail = [...new Set(ALL.filter(p=>p.series===sel.series).map(p=>p.circuits))].sort((a,b)=>a-b);
+  const grid = document.getElementById('circuits-opts');
+  grid.innerHTML = avail.map(c=>`<div class="opt-card" data-circuits="${c}"><div class="onum">${c}</div><div class="olabel">контур${c===1?'':'ов'}</div></div>`).join('');
+  grid.querySelectorAll('.opt-card').forEach(c=>{
+    c.addEventListener('click',()=>{
+      grid.querySelectorAll('.opt-card').forEach(x=>x.classList.remove('selected'));
+      c.classList.add('selected');
+      sel.circuits=+c.dataset.circuits;
+      document.getElementById('to-results').disabled=false;
+      updateCount();
+    });
+  });
+}
+document.getElementById('to-results').addEventListener('click',showResults);
+
+function getMatches() {
+  if(!sel.series) return [];
+  return ALL.filter(p=> p.series===sel.series && (!sel.circuits||p.circuits===sel.circuits) && Math.abs(p.power_kw-sel.power)<=35 ).sort((a,b)=>Math.abs(a.power_kw-sel.power)-Math.abs(b.power_kw-sel.power));
+}
+
+function updateCount() {
+  const m = getMatches();
+  document.getElementById('match-count').textContent = sel.series ? m.length || '0' : '—';
+  document.getElementById('match-hint').textContent = !sel.series ? 'Заполните параметры' : m.length ? `моделей ${sel.series} в диапазоне ±35 кВт` : 'Нет точных — предложим ближайшие';
+}
+
+function showResults() {
+  const matches = getMatches();
+  const recSec = document.getElementById('rec-section');
+  const noMatch = document.getElementById('no-match');
+  recSec.classList.remove('visible');
+  noMatch.classList.remove('visible');
+
+  let toShow = matches.slice(0,3);
+  let isApprox = false;
+
+  if(!toShow.length) {
+    toShow = ALL.filter(p=>p.series===sel.series).sort((a,b)=>Math.abs(a.power_kw-sel.power)-Math.abs(b.power_kw-sel.power)).slice(0,3);
+    isApprox = true;
+  }
+
+  if(!toShow.length) { noMatch.classList.add('visible'); return; }
+
+  recSec.classList.add('visible');
+  document.getElementById('rec-title').textContent = isApprox ? 'Ближайшие модели (точного совпадения нет)' : 'Подходящие модели';
+  document.getElementById('rec-sub').textContent = isApprox
+    ? `По вашим параметрам точного совпадения нет. Показываем ближайшие по мощности. Для нестандартного числа контуров — закажите под чертёж.`
+    : `${toShow.length} вариант${toShow.length>1?'а':''} для серии ${sel.series}, ${sel.circuits} контуров, мощность около ${sel.power} кВт.`;
+
+  document.getElementById('rec-grid').innerHTML = toShow.map((p,i)=>`
+    <div class="rec-card ${i===0?'best':''}">
+      <div class="rec-badge">${i===0?(isApprox?'Ближайший вариант':'★ Точное совпадение'):'&nbsp;'}</div>
+      <h3>${p.name}</h3>
+      <div class="rec-specs">
+        <div class="rs"><span class="rsk">Контуры</span><span class="rsv">${p.circuits}</span></div>
+        <div class="rs"><span class="rsk">Мощность</span><span class="rsv">${p.power_kw} кВт</span></div>
+        <div class="rs"><span class="rsk">DN насоса</span><span class="rsv">${p.diameter}</span></div>
+        <div class="rs"><span class="rsk">Подкл. источника</span><span class="rsv">${p.conn_source}</span></div>
+      </div>
+      <div class="rec-price">${p.price_retail.toLocaleString('ru-RU')} ₽</div>
+      <div class="rec-actions">
+        <a class="btn btn-primary" href="product.html?id=${encodeURIComponent(p.id)}">Подробнее и в корзину</a>
+        <a class="btn btn-outline" href="catalog.html">Весь каталог</a>
+      </div>
+    </div>
+  `).join('');
+
+  recSec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>
