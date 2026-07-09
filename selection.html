@@ -14,18 +14,17 @@ body{background:var(--bg);color:var(--graphite);font-family:var(--body);line-hei
 a{color:inherit;text-decoration:none;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
-.nav{display:flex;align-items:center;justify-content:space-between;height:84px;flex-wrap:nowrap;gap:24px;}
-.logo{display:flex;align-items:center;gap:14px;flex-shrink:0;}
-.logo-mark{width:38px;height:38px;}
-.logo-mark svg{width:100%;height:100%;}
-.logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.1;}
-  .logo-link{cursor:pointer; transition:opacity .15s ease;}
-  .logo-link:hover{opacity:0.8;}
+  .nav{display:flex;align-items:center;height:84px;flex-wrap:nowrap;gap:48px;gap:24px;}
+  .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;color:inherit;}
+  .logo-mark{width:38px;height:38px;flex-shrink:0;}
+  .logo-mark svg{width:100%;height:100%;display:block;}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.1;}
   .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
-nav ul{list-style:none;display:flex;gap:24px;white-space:nowrap;}
-nav ul a{font-size:14px;font-weight:500;color:var(--graphite);white-space:nowrap;}
-nav ul a:hover,nav ul a.active{color:var(--copper);}
-.nav-cta{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+  .logo:hover{opacity:.85;}
+  nav ul{list-style:none;display:flex;gap:26px;white-space:nowrap;}
+  nav ul a{font-size:14px;font-weight:500;color:var(--graphite);text-decoration:none;white-space:nowrap;}
+  nav ul a:hover,nav ul a.active{color:var(--copper);}
+  .nav-cta{display:flex;align-items:center;gap:16px;flex-shrink:0;margin-left:auto;}
 .btn{font-family:var(--body);font-weight:600;font-size:13px;padding:12px 24px;border-radius:2px;letter-spacing:.02em;border:1.5px solid var(--graphite);cursor:pointer;transition:all .2s;background:transparent;display:inline-block;text-align:center;}
 .btn:disabled{opacity:.4;cursor:not-allowed;}
 .btn-primary{background:var(--graphite);color:#fff;border-color:var(--graphite);}
@@ -126,19 +125,71 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
 
 @media(max-width:1040px){nav ul{display:none;}}
 @media(max-width:860px){.funnel-layout{grid-template-columns:1fr;}.sidebar{position:static;}.rec-grid{grid-template-columns:1fr;}.option-grid{grid-template-columns:repeat(2,1fr);}.compare-table{font-size:12px;}}
+
+  /* === Lead form (donor element) === */
+  .lead-section{padding:72px 0;border-top:1px solid var(--steel-line);}
+  .lead-card{background:#fff;border:1px solid var(--steel-line);padding:48px;max-width:800px;margin:0 auto;}
+  .lead-card .ltag{font-family:var(--mono);font-size:11px;color:var(--copper);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block;}
+  .lead-card h2{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.01em;margin-bottom:12px;}
+  .lead-card .ldesc{color:var(--steel);font-size:14.5px;margin-bottom:32px;line-height:1.6;max-width:540px;}
+  .lead-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .lead-field label{display:block;font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;}
+  .lead-field input,.lead-field select,.lead-field textarea{
+    width:100%;padding:13px 14px;border:1px solid var(--steel-line);
+    font-family:var(--body);font-size:14px;color:var(--graphite);background:#fff;border-radius:1px;
+  }
+  .lead-field input:focus,.lead-field select:focus,.lead-field textarea:focus{outline:2px solid var(--copper);outline-offset:-1px;border-color:var(--copper);}
+  .lead-field textarea{min-height:100px;resize:vertical;}
+  .lead-field.full{grid-column:1/-1;}
+  .checkboxes{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;}
+  .checkboxes label{display:flex;align-items:center;gap:7px;font-size:14px;cursor:pointer;}
+  .checkboxes input[type=checkbox]{accent-color:var(--copper);width:16px;height:16px;}
+  .check-label{font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .cart-icon-btn{
+    position:relative; background:none; border:none; cursor:pointer;
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    color:var(--graphite); transition:color .15s ease; flex-shrink:0;
+  }
+  .cart-icon-btn svg{width:24px; height:24px;}
+  .cart-icon-btn:hover{color:var(--copper);}
+  .cart-badge{
+    position:absolute; top:-2px; right:-4px;
+    background:var(--copper); color:#fff;
+    font-family:var(--mono); font-size:10px; font-weight:600;
+    min-width:18px; height:18px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    padding:0 4px; line-height:1;
+  }
+  footer{background:var(--graphite);color:#fff;padding:56px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid #3A3937;}
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;text-decoration:none;}
+  .footer-logo .logo-mark{width:34px;height:34px;flex-shrink:0;}
+  .footer-logo .logo-mark svg{width:100%;height:100%;display:block;}
+  .footer-logo .logo-text{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.02em;line-height:1.1;color:#fff;}
+  .footer-logo .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:10px;letter-spacing:.12em;color:#74726C;text-transform:uppercase;margin-top:2px;}
+  .footer-about{font-size:13px;color:#74726C;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A8A6A0;margin-bottom:16px;}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:10px;}
+  .footer-col a{font-size:13.5px;color:#74726C;text-decoration:none;transition:color .15s;}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{display:flex;justify-content:space-between;padding:20px 0;font-size:12px;color:#4A4846;}
+  @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px;}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo logo-link">
-      <div class="logo-mark"><svg viewBox="0 0 100 100" fill="none">
-  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
-  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
-  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
-  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
-</svg></div>
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
+          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
+          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
+          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+        </svg>
+      </div>
       <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
     </a>
     <nav>
@@ -152,7 +203,14 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
       </ul>
     </nav>
     <div class="nav-cta">
-      <button class="btn btn-primary">Корзина (0)</button>
+      <button class="cart-icon-btn" aria-label="Корзина">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9.5" cy="20" r="1.3" fill="currentColor"/>
+        <circle cx="18.5" cy="20" r="1.3" fill="currentColor"/>
+      </svg>
+      <span class="cart-badge" style="display:none;">0</span>
+    </button>
     </div>
   </div>
 </header>
@@ -344,10 +402,108 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
   </div>
 </div>
 
-<footer>
-  <div class="wrap footer-bottom">
-    <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
-    <span>ИНН 0000000000 · ISO 9001:2015</span>
+<div class="lead-section" id="lead-form">
+  <div class="wrap">
+    <div class="lead-card">
+      <span class="ltag">Не нашли подходящую модель?</span>
+      <h2>Оставьте заявку — подберём под ваши параметры</h2>
+      <p class="ldesc">Если ни одна конфигурация не подошла или нужна помощь с выбором — отправьте параметры объекта. Проверим мощность, контуры, DN и подберём решение под вашу схему.</p>
+      <div class="lead-row">
+        <div class="lead-field">
+          <label>Имя *</label>
+          <input type="text" placeholder="Иван Иванов">
+        </div>
+        <div class="lead-field">
+          <label>Телефон *</label>
+          <input type="tel" placeholder="+7 (999) 123-45-67">
+        </div>
+      </div>
+      <div class="lead-row">
+        <div class="lead-field">
+          <label>Мощность котла / нагрузка</label>
+          <select>
+            <option value="">Выберите мощность</option>
+            <option>до 65 кВт</option>
+            <option>65–100 кВт</option>
+            <option>100–150 кВт</option>
+            <option>150–200 кВт</option>
+            <option>свыше 200 кВт</option>
+          </select>
+        </div>
+        <div class="lead-field">
+          <label>Количество контуров</label>
+          <select>
+            <option value="">Выберите количество</option>
+            <option>1–2</option>
+            <option>3–4</option>
+            <option>5–6</option>
+            <option>7–9</option>
+            <option>10 и более</option>
+          </select>
+        </div>
+      </div>
+      <div class="check-label">Тип отопительной системы</div>
+      <div class="checkboxes">
+        <label><input type="checkbox"> Радиаторы</label>
+        <label><input type="checkbox"> Тёплый пол</label>
+        <label><input type="checkbox"> Бойлер</label>
+        <label><input type="checkbox"> Насосная группа</label>
+        <label><input type="checkbox"> Другое</label>
+      </div>
+      <div class="lead-row">
+        <div class="lead-field full">
+          <label>Комментарий</label>
+          <textarea placeholder="Параметры объекта, схема обвязки, особые требования…"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="padding:14px 32px;font-size:14px;">Отправить заявку</button>
+    </div>
+  </div>
+</div>
+<footer id="contacts">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="footer-logo">
+          <div class="logo-mark"><svg viewBox="0 0 100 100" fill="none">
+          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#ffffff"/>
+          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#ffffff"/>
+          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#ffffff"/>
+          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+        </svg></div>
+          <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+        </a>
+        <p class="footer-about">Производитель гидравлических коллекторов и гидрострелок из нержавеющей стали AISI 304. Собственное производство — от лазерной резки до опрессовки.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Продукция</h4>
+        <ul>
+          <li><a href="catalog.html">Каталог изделий</a></li>
+          <li><a href="selection.html">Подбор по параметрам</a></li>
+          <li><a href="custom-order.html">Под заказ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="production.html">Производство</a></li>
+          <li><a href="knowledge.html">База знаний</a></li>
+          <li><a href="index.html#contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><a href="mailto:info@kovach-hydraulic.ru">info@kovach-hydraulic.ru</a></li>
+          <li><a href="#">Адрес производства</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
+      <span>ИНН 0000000000 · ISO 9001:2015</span>
+    </div>
   </div>
 </footer>
 
