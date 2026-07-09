@@ -43,22 +43,18 @@
   .bracket::after{ bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; }
 
   /* ---- header ---- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--steel-line);
-  }
-  .nav{display:flex; align-items:center; justify-content:space-between; height:84px; flex-wrap:nowrap; gap:24px;}
-  .logo{display:flex; align-items:center; gap:14px; flex-shrink:0;}
-  .logo-mark{width:38px; height:38px; position:relative;}
-  .logo-mark svg{width:100%; height:100%;}
-  .logo-text{font-family:var(--display); font-weight:800; font-size:19px; letter-spacing:0.02em; line-height:1.1;}
-  .logo-text span{display:block; font-family:var(--body); font-weight:500; font-size:11px; letter-spacing:0.12em; color:var(--steel); text-transform:uppercase; margin-top:2px;}
-  nav ul{list-style:none; display:flex; gap:26px; white-space:nowrap;}
-  nav ul a{font-size:14px; font-weight:500; color:var(--graphite); position:relative; padding:6px 0; white-space:nowrap;}
-  nav ul a:hover{color:var(--copper);}
-  .nav-cta{display:flex; align-items:center; gap:16px; flex-shrink:0; white-space:nowrap;}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
+  .nav{display:flex;align-items:center;height:84px;flex-wrap:nowrap;gap:48px;padding-right:40px;}
+  .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;color:inherit;}
+  .logo-mark{width:38px;height:38px;flex-shrink:0;}
+  .logo-mark svg{width:100%;height:100%;display:block;}
+  .logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.1;}
+  .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
+  .logo:hover{opacity:.85;}
+  nav ul{list-style:none;display:flex;gap:26px;white-space:nowrap;}
+  nav ul a{font-size:14px;font-weight:500;color:var(--graphite);text-decoration:none;white-space:nowrap;}
+  nav ul a:hover,nav ul a.active{color:var(--copper);}
+  .nav-cta{display:flex;align-items:center;flex-shrink:0;margin-left:auto;}
   .btn{
     font-family:var(--body); font-weight:600; font-size:13px;
     padding:12px 24px; border-radius:2px; letter-spacing:0.02em;
@@ -132,7 +128,7 @@
 
   /* ---- advantages ---- */
   .adv-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--steel-line); border:1px solid var(--steel-line);}
-  .adv-card{background:#fff; padding:36px 28px;}
+  .adv-card{background:#fff; padding:36px 28px; display:flex; flex-direction:column; align-items:center; text-align:center;}
   .adv-icon{
     width:48px; height:48px; display:flex; align-items:center; justify-content:center;
     border:2px solid var(--copper); color:var(--copper);
@@ -148,12 +144,12 @@
   .process .section-head h2{color:#fff;}
   .process .section-head p{color:#A8A6A0;}
   .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#3A3937;}
-  .process-step{background:var(--graphite); padding:36px 28px;}
+  .process-step{background:var(--graphite); padding:36px 28px; display:flex; flex-direction:column;}
   .process-step .step-num{font-family:var(--mono); font-size:13px; color:var(--spark); margin-bottom:28px;}
   .process-step h3{font-family:var(--display); font-weight:700; font-size:19px; margin-bottom:12px;}
   .process-step p{font-size:13.5px; color:#A8A6A0; line-height:1.6;}
   .process-step .tolerance{
-    margin-top:20px; padding-top:16px; border-top:1px solid #3A3937;
+    margin-top:auto; padding-top:16px; border-top:1px solid #3A3937;
     font-family:var(--mono); font-size:12px; color:#74726C;
   }
 
@@ -210,18 +206,7 @@
   .trust-item .dot{width:6px; height:6px; background:var(--copper); border-radius:50%;}
 
   /* ---- footer ---- */
-  footer{background:var(--graphite); color:#fff; padding:80px 0 32px;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:60px; padding-bottom:64px; border-bottom:1px solid #3A3937;}
-  .footer-logo{display:flex; align-items:center; gap:14px; margin-bottom:20px;}
-  .footer-logo .logo-text{color:#fff;}
-  .footer-logo .logo-text span{color:#82817C;}
   footer p.about{font-size:13.5px; color:#A8A6A0; max-width:280px; line-height:1.7;}
-  .footer-col h4{font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#82817C; margin-bottom:20px;}
-  .footer-col ul{list-style:none;}
-  .footer-col li{margin-bottom:12px;}
-  .footer-col a{font-size:14px; color:#D8D6CF;}
-  .footer-col a:hover{color:var(--spark);}
-  .footer-bottom{display:flex; justify-content:space-between; padding-top:28px; font-size:12px; color:#74726C;}
 
   @media (max-width:1040px){
     nav ul{display:none;}
@@ -233,44 +218,99 @@
     .products-grid{grid-template-columns:1fr;}
     .audience-grid{grid-template-columns:1fr; gap:36px;}
     .tech-grid{grid-template-columns:1fr; gap:48px;}
-    .footer-grid{grid-template-columns:1fr 1fr; gap:40px;}
     .section{padding:72px 0;}
     .section-head{flex-direction:column; align-items:flex-start; gap:16px;}
   }
+
+  /* === CTA banner (donor element) === */
+  .cta-banner{background:var(--graphite);padding:56px 0;}
+  .cta-banner-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .cta-banner h2{font-family:var(--display);font-weight:800;font-size:26px;color:#fff;margin-bottom:10px;letter-spacing:-.01em;}
+  .cta-banner p{color:#A8A6A0;font-size:15px;max-width:520px;line-height:1.6;}
+  .btn-copper{background:var(--copper);color:#fff;border-color:var(--copper);white-space:nowrap;}
+  .btn-copper:hover{background:#a8541a;border-color:#a8541a;}
+  /* Cart icon */
+  .cart-icon-btn{
+    position:relative; background:none; border:none; cursor:pointer;
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    color:var(--graphite); transition:color .15s ease; flex-shrink:0;
+  }
+  .cart-icon-btn svg{width:24px; height:24px;}
+  .cart-icon-btn:hover{color:var(--copper);}
+  .cart-icon-btn.has-items{color:var(--graphite);}
+  .cart-badge{
+    position:absolute; top:-2px; right:-4px;
+    background:var(--copper); color:#fff;
+    font-family:var(--mono); font-size:10px; font-weight:600;
+    min-width:18px; height:18px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    padding:0 4px; line-height:1;
+  }
+  @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px;}}
+  @media(max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+  footer{background:var(--graphite);color:#fff;padding:56px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid #3A3937;}
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;text-decoration:none;}
+  .footer-logo .logo-mark{width:34px;height:34px;flex-shrink:0;}
+  .footer-logo .logo-mark svg{width:100%;height:100%;display:block;}
+  .footer-logo .logo-text{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.02em;line-height:1.1;color:#fff;}
+  .footer-logo .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:10px;letter-spacing:.12em;color:#74726C;text-transform:uppercase;margin-top:2px;}
+  .footer-about{font-size:13px;color:#74726C;line-height:1.65;max-width:280px;}
+  .footer-col h4{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A8A6A0;margin-bottom:16px;}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:10px;}
+  .footer-col a{font-size:13.5px;color:#74726C;text-decoration:none;transition:color .15s;}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{display:flex;justify-content:space-between;padding:20px 0;font-size:12px;color:#4A4846;}
+  @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px;}}
+
+  /* Quick selector chips */
+  .chip-group{margin-bottom:20px;}
+  .chip-label{font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:var(--body);font-size:13px;padding:8px 14px;
+    border:1.5px solid var(--steel-line);background:#fff;color:var(--graphite);
+    cursor:pointer;transition:all .15s ease;border-radius:1px;
+  }
+  .chip:hover{border-color:var(--graphite);}
+  .chip.active{background:var(--graphite);color:#fff;border-color:var(--graphite);}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <div class="logo">
+    <a href="index.html" class="logo">
       <div class="logo-mark">
         <svg viewBox="0 0 100 100" fill="none">
-  <!-- Frame: top-left corner (top horizontal line + left vertical line) -->
-  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
-  <!-- Frame: bottom-right corner (bottom line full width) -->
-  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
-  <!-- Bracket top arm + upper spine (graphite) -->
-  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
-  <!-- Bracket lower spine + bottom arm (copper) -->
-  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
+          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
+          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
+          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
         </svg>
       </div>
       <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
-    </div>
+    </a>
     <nav>
       <ul>
         <li><a href="catalog.html">Продукция</a></li>
+        <li><a href="selection.html">Подбор</a></li>
         <li><a href="production.html">Производство</a></li>
-        <li><a href="#technical">Для инженеров</a></li>
-                <li><a href="custom-order.html">Под заказ</a></li>
+        <li><a href="custom-order.html">Под заказ</a></li>
         <li><a href="knowledge.html">База знаний</a></li>
         <li><a href="#contacts">Контакты</a></li>
       </ul>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost" href="#">Оптовым клиентам</a>
-      <button class="btn btn-primary"><span class="cart-btn-label">Корзина (0)</span></button>
+      <button class="cart-icon-btn" onclick="void(0)" aria-label="Корзина">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9.5" cy="20" r="1.3" fill="currentColor"/>
+        <circle cx="18.5" cy="20" r="1.3" fill="currentColor"/>
+      </svg>
+      <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+    </button>
     </div>
   </div>
 </header>
@@ -282,8 +322,8 @@
       <h1>Гидравлика,<br>рассчитанная<br>на <em>десятилетия</em></h1>
       <p class="lead">Гидрострелки и коллекторы из нержавеющей стали AISI 304. Собственное производство — от лазерной резки до опрессовки каждого корпуса.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary">Смотреть каталог</button>
-        <button class="btn btn-ghost">Скачать чертежи DWG</button>
+        <a href="catalog.html" class="btn btn-primary">Смотреть каталог</a>
+        <a href="selection.html" class="btn btn-ghost">Подобрать модель →</a>
       </div>
       <div class="hero-stats">
         <div><div class="num">8 бар</div><div class="label">макс. рабочее давление</div></div>
@@ -484,7 +524,6 @@
         <span class="tag">Как это сделано</span>
         <h2>Каждое изделие проходит четыре контрольные точки</h2>
       </div>
-      <p>Мы не закупаем готовые корпуса — весь цикл от заготовки до упаковки происходит на одной площадке.</p>
     </div>
     <div class="process-grid">
       <div class="process-step">
@@ -512,9 +551,11 @@
         <div class="tolerance">До 16 бар, 5 мин</div>
       </div>
     </div>
-    <div style="margin-top:32px; padding-top:32px; border-top:1px solid #3A3937; display:flex; justify-content:space-between; align-items:center;">
-      <p style="color:#A8A6A0; font-size:14px; max-width:480px;">Весь цикл — от листовой заготовки до протокола испытаний — на одной площадке. Фотографии и подробное описание каждого этапа.</p>
-      <a href="production.html" class="btn" style="border-color:#fff; color:#fff; white-space:nowrap; flex-shrink:0;">Подробнее о производстве →</a>
+    <div style="margin-top:32px; padding-top:28px; border-top:1px solid #3A3937;">
+      <a href="production.html" style="color:#A8A6A0; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+        Весь цикл — от заготовки до протокола испытаний — на одной площадке.
+        <span style="color:var(--spark); font-weight:600; white-space:nowrap;">Фотографии и описание каждого этапа →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -526,7 +567,6 @@
         <span class="tag">Линейка продукции</span>
         <h2>Коллекторы, гидрострелки и арматура собственного изготовления</h2>
       </div>
-      <p>Полные тех. характеристики, чертежи и сертификаты — в карточке каждого изделия.</p>
     </div>
     <div class="products-grid bracket">
       <div class="product-card">
@@ -566,6 +606,10 @@
         </div>
       </div>
     </div>
+    <div style="text-align:center; margin-top:32px; padding-top:32px; border-top:1px solid var(--steel-line);">
+      <a href="catalog.html" class="btn btn-primary" style="margin-right:12px;">Смотреть каталог</a>
+      <a href="selection.html" class="btn btn-ghost">Подобрать модель →</a>
+    </div>
   </div>
 </section>
 
@@ -597,6 +641,45 @@
   </div>
 </section>
 
+
+<section style="background:var(--graphite);color:#fff;padding:72px 0;">
+  <div class="wrap">
+    <span class="tag" style="color:var(--spark);">Как выбрать</span>
+    <h2 style="font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.01em;margin-bottom:12px;color:#fff;">Какое изделие подходит для вашей задачи</h2>
+    <p style="color:#A8A6A0;font-size:15px;margin-bottom:48px;max-width:560px;">Каждое изделие решает конкретную задачу: разделение котлового и отопительных контуров, распределение теплоносителя по ветвям, компактность монтажа или нестандартная конфигурация под объект.</p>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:1px solid #3A3937;">
+          <th style="font-family:var(--mono);font-size:11px;color:#74726C;letter-spacing:.1em;text-transform:uppercase;padding:0 0 16px;text-align:left;width:28%;">Тип изделия</th>
+          <th style="font-family:var(--mono);font-size:11px;color:#74726C;letter-spacing:.1em;text-transform:uppercase;padding:0 0 16px;text-align:left;">Когда выбирать</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #3A3937;">
+          <td style="padding:22px 0;font-size:15px;color:#fff;vertical-align:top;padding-right:40px;">Коллектор с гидрострелкой<br><span style="font-family:var(--mono);font-size:11px;color:var(--spark);">КГБ1</span></td>
+          <td style="padding:22px 0;font-size:14px;color:#A8A6A0;line-height:1.6;">Когда нужно совместить гидравлическое разделение котлового контура и распределение по потребителям в одном корпусе. Универсальное решение для большинства систем с несколькими контурами.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #3A3937;">
+          <td style="padding:22px 0;font-size:15px;color:#fff;vertical-align:top;padding-right:40px;">Коллектор без байпаса<br><span style="font-family:var(--mono);font-size:11px;color:var(--spark);">КГК1 / КГК1-Д</span></td>
+          <td style="padding:22px 0;font-size:14px;color:#A8A6A0;line-height:1.6;">Когда байпас реализован во внешней схеме или не нужен. Распределяет теплоноситель по нескольким контурам с независимой регулировкой каждого. КГК1-Д — с дренажным краном для удобного обслуживания.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #3A3937;">
+          <td style="padding:22px 0;font-size:15px;color:#fff;vertical-align:top;padding-right:40px;">Компактная гидрострелка<br><span style="font-family:var(--mono);font-size:11px;color:var(--spark);">КГ1</span></td>
+          <td style="padding:22px 0;font-size:14px;color:#A8A6A0;line-height:1.6;">Когда нужна только гидравлическая стрелка без распределительного коллектора. Наружная резьба, компактные габариты, DN20–50. Подходит для ограниченного пространства и небольших систем от 35 кВт.</td>
+        </tr>
+        <tr>
+          <td style="padding:22px 0;font-size:15px;color:#fff;vertical-align:top;padding-right:40px;">Изделие под заказ</td>
+          <td style="padding:22px 0;font-size:14px;color:#A8A6A0;line-height:1.6;">Когда нужна нестандартная конфигурация: другой диаметр, нестандартное число контуров, межосевое расстояние под существующую обвязку или особое расположение патрубков. Тот же AISI 304, тот же контроль качества.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:40px;">
+      <a href="selection.html" class="btn" style="border-color:#fff;color:#fff;margin-right:16px;">Подобрать модель →</a>
+      <a href="custom-order.html" style="font-size:14px;color:#A8A6A0;font-weight:500;">Изделие под заказ →</a>
+    </div>
+  </div>
+</section>
+
 <section class="technical" id="technical">
   <div class="wrap section">
     <div class="tech-grid">
@@ -604,6 +687,9 @@
         <span class="tag">Для инженеров</span>
         <h2>Подбор гидрострелки по мощности котла</h2>
         <p class="lead">Введите параметры системы — рассчитаем минимальный диаметр и серию изделия с учётом запаса по расходу.</p>
+        <p style="margin-bottom:20px; font-size:13.5px; color:var(--steel);">Нужен пошаговый подбор с выбором серии, контуров и ценами?
+          <a href="selection.html" style="color:var(--copper); font-weight:600; white-space:nowrap;">Перейти в раздел «Подбор» →</a>
+        </p>
         <div class="doc-list">
           <div class="doc-row"><span class="doc-name">Каталог продукции 2026<span class="doc-fmt">PDF · 14 МБ</span></span><a class="doc-dl" href="#">Скачать ↓</a></div>
           <div class="doc-row"><span class="doc-name">Чертежи серии HS<span class="doc-fmt">DWG · ZIP</span></span><a class="doc-dl" href="#">Скачать ↓</a></div>
@@ -611,25 +697,39 @@
         </div>
       </div>
       <div class="calc-card bracket">
-        <span class="tag">Подбор по характеристикам</span>
-        <div class="field">
-          <label>МОЩНОСТЬ (ΔТ-25), кВт</label>
-          <select id="sel-power"></select>
+        <span class="tag">Быстрый подбор</span>
+        <div class="chip-group">
+          <div class="chip-label">Мощность котла</div>
+          <div class="chips" id="chips-power">
+            <button class="chip" data-power="65">до 65 кВт</button>
+            <button class="chip" data-power="90">65–90 кВт</button>
+            <button class="chip" data-power="140">90–140 кВт</button>
+            <button class="chip" data-power="200">140–200 кВт</button>
+            <button class="chip" data-power="260">200+ кВт</button>
+          </div>
         </div>
-        <div class="field">
-          <label>КОЛИЧЕСТВО КОНТУРОВ</label>
-          <select id="sel-circuits"></select>
+        <div class="chip-group">
+          <div class="chip-label">Количество контуров</div>
+          <div class="chips" id="chips-circuits">
+            <button class="chip" data-circuits="2">2</button>
+            <button class="chip" data-circuits="3">3</button>
+            <button class="chip" data-circuits="4">4</button>
+            <button class="chip" data-circuits="5">5</button>
+            <button class="chip" data-circuits="6">6</button>
+            <button class="chip" data-circuits="7">7+</button>
+          </div>
         </div>
-        <div class="field">
-          <label>ПОДКЛЮЧЕНИЕ ИСТОЧНИКА</label>
-          <select id="sel-source"></select>
+        <div class="chip-group">
+          <div class="chip-label">Что нужно</div>
+          <div class="chips" id="chips-type">
+            <button class="chip" data-type="КГБ1">Коллектор с гидрострелкой</button>
+            <button class="chip" data-type="КГК1">Коллектор без байпаса</button>
+            <button class="chip" data-type="КГ1">Компактная гидрострелка</button>
+            <button class="chip" data-type="">Не знаю — подберите сами</button>
+          </div>
         </div>
-        <div class="field">
-          <label>ПОДКЛЮЧЕНИЕ К НАСОСУ, DN</label>
-          <select id="sel-dn"></select>
-        </div>
-        <button class="btn btn-primary" style="width:100%;" id="sel-go">Подобрать модель</button>
-        <div class="calc-result" id="sel-result">Заполните параметры — покажем подходящую модель из прайса.</div>
+        <button class="btn btn-primary" style="width:100%;margin-top:8px;" id="sel-go">Подобрать модель</button>
+        <div class="calc-result" id="sel-result">Выберите мощность и контуры — покажем подходящую модель с ценой.</div>
       </div>
     </div>
   </div>
@@ -639,47 +739,39 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo">
-          <div class="logo-mark">
-            <svg viewBox="0 0 100 100" fill="none">
-  <!-- Frame: top-left corner (top horizontal line + left vertical line) -->
-  <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#ffffff"/>
-  <!-- Frame: bottom-right corner (bottom line full width) -->
-  <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#ffffff"/>
-  <!-- Bracket top arm + upper spine (graphite) -->
-  <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#ffffff"/>
-  <!-- Bracket lower spine + bottom arm (copper) -->
-  <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
-        </svg>
-          </div>
+        <a href="index.html" class="footer-logo">
+          <div class="logo-mark"><svg viewBox="0 0 100 100" fill="none">
+          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#ffffff"/>
+          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#ffffff"/>
+          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#ffffff"/>
+          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
+        </svg></div>
           <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
-        </div>
-        <p class="about">Собственное производство гидравлических коллекторов, гидрострелок и балансировочной арматуры. Инженерная точность в каждом узле.</p>
+        </a>
+        <p class="footer-about">Производитель гидравлических коллекторов и гидрострелок из нержавеющей стали AISI 304. Собственное производство — от лазерной резки до опрессовки.</p>
       </div>
       <div class="footer-col">
         <h4>Продукция</h4>
         <ul>
-          <li><a href="#">Гидрострелки</a></li>
-          <li><a href="#">Коллекторы</a></li>
-          <li><a href="#">Балансировочные клапаны</a></li>
-          <li><a href="#">Аксессуары</a></li>
+          <li><a href="catalog.html">Каталог изделий</a></li>
+          <li><a href="selection.html">Подбор по параметрам</a></li>
+          <li><a href="custom-order.html">Под заказ</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Компания</h4>
         <ul>
-          <li><a href="#">О производстве</a></li>
-          <li><a href="#">Сертификаты</a></li>
-          <li><a href="#">Оптовым клиентам</a></li>
-          <li><a href="#">Документация</a></li>
+          <li><a href="production.html">Производство</a></li>
+          <li><a href="knowledge.html">База знаний</a></li>
+          <li><a href="#contacts">Контакты</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Контакты</h4>
         <ul>
-          <li><a href="#">+7 (000) 000-00-00</a></li>
-          <li><a href="#">info@kovach-hydraulic.ru</a></li>
-          <li><a href="#">Завод и склад: адрес</a></li>
+          <li><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><a href="mailto:info@kovach-hydraulic.ru">info@kovach-hydraulic.ru</a></li>
+          <li><a href="#">Адрес производства</a></li>
         </ul>
       </div>
     </div>
@@ -700,42 +792,70 @@ function fillSelect(id, values, formatter){
   el.innerHTML = values.map(v=>`<option value="${v}">${formatter?formatter(v):v}</option>`).join('');
 }
 
-const powers = [...new Set(ALL.map(p=>p.power_kw))].sort((a,b)=>a-b);
-const circuitsVals = [...new Set(ALL.map(p=>p.circuits))].sort((a,b)=>a-b);
-const sources = [...new Set(ALL.map(p=>p.conn_source).filter(Boolean))];
-const dnVals = [...new Set(ALL.map(p=>p.diameter).filter(Boolean))].sort((a,b)=>a-b);
+// Chip selector logic
+let selPower = null, selCircuits = null;
 
-fillSelect('sel-power', powers, v=>v+' кВт');
-fillSelect('sel-circuits', circuitsVals, v=>v+' '+(v===1?'контур':v<5?'контура':'контуров'));
-fillSelect('sel-source', sources);
-fillSelect('sel-dn', dnVals, v=>'DN'+v);
+document.querySelectorAll('#chips-power .chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#chips-power .chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selPower = Number(btn.dataset.power);
+  });
+});
 
-document.getElementById('sel-go').addEventListener('click', ()=>{
-  const power = Number(document.getElementById('sel-power').value);
-  const circuits = Number(document.getElementById('sel-circuits').value);
-  const source = document.getElementById('sel-source').value;
-  const dn = Number(document.getElementById('sel-dn').value);
+document.querySelectorAll('#chips-circuits .chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#chips-circuits .chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selCircuits = Number(btn.dataset.circuits);
+  });
+});
 
-  let matches = ALL.filter(p=>p.power_kw===power && p.circuits===circuits && p.conn_source===source && p.diameter===dn);
-  let note = '';
-  if(matches.length===0){
-    matches = ALL.filter(p=>p.power_kw===power && p.circuits>=circuits && p.diameter===dn);
-    note = 'Точного совпадения по всем параметрам нет — показана ближайшая модель по мощности, контурам и DN.';
-  }
+let selType = null;
+document.querySelectorAll('#chips-type .chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#chips-type .chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selType = btn.dataset.type || null;
+  });
+});
+
+document.getElementById('sel-go').addEventListener('click', () => {
   const resultEl = document.getElementById('sel-result');
-  if(matches.length===0){
-    resultEl.innerHTML = 'Подходящей модели не найдено. Свяжитесь с нами — подберём индивидуально.';
+  if (!selPower || !selCircuits) {
+    resultEl.innerHTML = 'Выберите мощность и количество контуров.';
     return;
   }
-  matches.sort((a,b)=>a.price_retail-b.price_retail);
+  // Find matches: exact power, circuits >= selected (7+ means >=7)
+  const circMin = selCircuits;
+  const circMax = selCircuits === 7 ? 99 : selCircuits;
+  let matches = ALL.filter(p =>
+    p.power_kw <= selPower &&
+    p.circuits >= circMin &&
+    p.circuits <= circMax &&
+    (!selType || p.series === selType)
+  );
+  let note = '';
+  if (matches.length === 0) {
+    // Fallback: closest power, any circuits >= selected
+    matches = ALL.filter(p => p.circuits >= circMin && p.circuits <= circMax)
+      .sort((a,b) => Math.abs(a.power_kw - selPower) - Math.abs(b.power_kw - selPower));
+    note = 'Точного совпадения нет — показана ближайшая модель.';
+  }
+  if (matches.length === 0) {
+    resultEl.innerHTML = 'Подходящей модели не найдено. <a href="selection.html" style="color:var(--copper);font-weight:600;">Подберём индивидуально →</a>';
+    return;
+  }
+  matches.sort((a,b) => a.price_retail - b.price_retail);
   const m = matches[0];
-  resultEl.innerHTML = `Подходящая модель: <strong>${m.name}</strong><br>
-    Материал: ${m.material}<br>
-    Подключение источника: ${m.conn_source||'—'} · потребителей: ${m.conn_consumer||'—'}<br>
-    Межосевое расстояние: ${m.center_distance?m.center_distance+' мм':'—'} · давление до ${m.max_pressure_bar||'—'} бар<br>
-    Цена розница: <strong>${m.price_retail.toLocaleString('ru-RU')} ₽</strong><br>
-    ${note}<br>
-    <a href="product.html?id=${encodeURIComponent(m.id)}" style="color:var(--copper); font-weight:600;">Открыть карточку товара →</a>`;
+  resultEl.innerHTML = `<strong>${m.name}</strong><br>
+    ${m.series_label}<br>
+    Контуры: ${m.circuits} · Мощность: ${m.power_kw} кВт · Подключение: ${m.conn_source||'—'}<br>
+    <span style="font-family:var(--mono);font-size:16px;color:var(--copper);">${m.price_retail.toLocaleString('ru-RU')} ₽</span>
+    ${note ? '<br><span style="font-size:11px;color:var(--steel);">'+note+'</span>' : ''}<br>
+    <a href="product.html?id=${encodeURIComponent(m.id)}" style="color:var(--copper);font-weight:600;">Карточка товара →</a>
+    &nbsp;·&nbsp;
+    <a href="selection.html" style="color:var(--steel);font-size:12px;">Все варианты →</a>`;
 });
 </script>
 </body>
