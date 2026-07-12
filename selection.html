@@ -231,19 +231,19 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
       <!-- Step 1 -->
       <div class="step-panel active" id="step1">
         <h2>Какой тип изделия нужен?</h2>
-        <p class="sub">Если не уверены — выбирайте КГБ1, это универсальный вариант для большинства систем отопления.</p>
+        <p class="sub">Если не уверены — выбирайте КГК1, это универсальный вариант для большинства систем отопления.</p>
         <div class="option-grid">
           <div class="opt-card" data-series="КГБ1">
             <div class="onum">КГБ1</div>
-            <div class="olabel">С байпасом — универсальный. Для большинства систем с несколькими контурами</div>
+            <div class="olabel">Коллектор — когда гидравлическое разделение котлового контура уже реализовано или не требуется</div>
           </div>
           <div class="opt-card" data-series="КГК1">
             <div class="onum">КГК1</div>
-            <div class="olabel">Без байпаса — когда байпас реализован внешней схемой или не нужен</div>
+            <div class="olabel">Коллектор с гидрострелкой — универсальный. Для большинства систем с несколькими контурами</div>
           </div>
           <div class="opt-card" data-series="КГК1-Д">
             <div class="onum">КГК1-Д</div>
-            <div class="olabel">С дренажным краном — удобно для периодического слива системы</div>
+            <div class="olabel">Коллектор с гидрострелкой и дешламатором — для защиты системы от загрязнений и удобного обслуживания</div>
           </div>
           <div class="opt-card" data-series="КГ1">
             <div class="onum">КГ1</div>
@@ -337,22 +337,22 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
       <thead>
         <tr>
           <th>Параметр</th>
-          <th>КГБ1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с байпасом</span></th>
-          <th>КГК1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">без байпаса</span></th>
-          <th>КГК1-Д<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с дренажом</span></th>
+          <th>КГБ1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">коллектор</span></th>
+          <th>КГК1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с гидрострелкой</span></th>
+          <th>КГК1-Д<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">с дешламатором</span></th>
           <th>КГ1<br><span style="font-family:Inter;font-weight:400;font-size:11px;opacity:.7">компактная</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Встроенный байпас</td>
+          <td>Встроенная гидрострелка</td>
+          <td><span class="cross">—</span></td>
           <td class="hi"><span class="check">✓</span> Есть</td>
-          <td><span class="cross">—</span></td>
-          <td><span class="cross">—</span></td>
+          <td class="hi"><span class="check">✓</span> Есть</td>
           <td><span class="cross">—</span></td>
         </tr>
         <tr>
-          <td>Дренажный кран</td>
+          <td>Дешламатор</td>
           <td><span class="cross">—</span></td>
           <td><span class="cross">—</span></td>
           <td class="hi"><span class="check">✓</span> Есть</td>
@@ -388,9 +388,9 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
         </tr>
         <tr>
           <td>Когда выбирать</td>
+          <td>Гидравлическое разделение уже реализовано во внешней схеме или не требуется</td>
           <td>Большинство многоконтурных систем — универсальный выбор</td>
-          <td>Байпас не нужен или реализован во внешней схеме</td>
-          <td>Нужен удобный слив без отключения системы</td>
+          <td>Нужна защита от шлама и упрощённое обслуживание системы</td>
           <td>Малая мощность, ограниченное пространство, наружная резьба</td>
         </tr>
         <tr>
@@ -502,7 +502,7 @@ footer{background:var(--graphite);color:#fff;padding:40px 0;}
     </div>
     <div class="footer-bottom">
       <span>© 2026 Ковач Гидравлик. Все права защищены.</span>
-      <span>ИНН 0000000000 · ISO 9001:2015</span>
+      <span>ИНН 0000000000 · РПВН.302637.001 ТУ</span>
     </div>
   </div>
 </footer>
