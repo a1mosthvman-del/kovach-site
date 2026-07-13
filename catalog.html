@@ -478,7 +478,10 @@ document.getElementById('f-reset').addEventListener('click', ()=>{
   render();
 });
 
-buildCheckGroup('f-series','series');
+buildCheckGroup('f-series','series', v=>{
+  const names = {'КГ1':'компактная','КГБ1':'коллектор','КГК1':'с гидрострелкой','КГК1-Д':'с дешламатором'};
+  return names[v] ? `${v} <span style="color:var(--steel);font-weight:400;">· ${names[v]}</span>` : v;
+});
 buildCheckGroup('f-diameter','diameter', v=>'DN'+v);
 render();
 </script>

@@ -40,24 +40,28 @@
   .page-head h1{font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-0.01em;max-width:680px;}
   .page-head p{color:var(--steel);font-size:15px;margin-top:14px;max-width:560px;}
 
-  .section{padding:80px 0;}
-  .section-head{margin-bottom:48px;}
+  .section{padding:72px 0;}
+  .section-head{margin-bottom:44px;}
   .section-head h2{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-0.01em;margin-bottom:10px;}
   .section-head p{color:var(--steel);font-size:14.5px;max-width:520px;}
 
-  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--steel-line);border:1px solid var(--steel-line);}
-  .step-card{background:#fff;padding:32px 26px;}
-  .step-card .num{font-family:var(--mono);font-size:13px;color:var(--copper);margin-bottom:20px;}
-  .step-card h3{font-family:var(--display);font-weight:700;font-size:16px;margin-bottom:10px;line-height:1.3;}
-  .step-card p{font-size:13.5px;color:var(--steel);line-height:1.6;}
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--steel-line);border-bottom:none;}
+  .step-card{padding:28px 24px;border-right:1px solid var(--steel-line);border-bottom:1px solid var(--steel-line);}
+  .step-card:last-child{border-right:none;}
+  .step-card h3{font-family:var(--display);font-weight:700;font-size:16px;margin-bottom:8px;line-height:1.3;}
+  .step-card h3 .num{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--copper);margin-right:4px;}
+  .step-card p{font-size:13px;color:var(--steel);line-height:1.55;}
 
-  .order-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .order-layout > div:first-child{margin-bottom:48px;}
   .order-layout h2{font-family:var(--display);font-weight:800;font-size:24px;margin-bottom:16px;}
-  .order-layout p.lead{color:var(--steel);font-size:14.5px;margin-bottom:28px;max-width:440px;}
-  .perk-list{list-style:none;}
-  .perk-list li{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--steel-line);font-size:14px;}
+  .order-layout p.lead{color:var(--graphite);font-size:14.5px;margin-bottom:28px;max-width:560px;}
+  .perk-list{list-style:none;max-width:760px;}
+  .perk-list li{
+    display:flex;gap:12px;padding:16px 0;border-top:1px solid var(--steel-line);
+    font-size:14px;line-height:1.55;color:var(--graphite);
+  }
   .perk-list li:last-child{border-bottom:1px solid var(--steel-line);}
-  .perk-list .dot{width:6px;height:6px;background:var(--copper);border-radius:50%;margin-top:7px;flex-shrink:0;}
+  .perk-list .dot{width:6px;height:6px;background:var(--copper);border-radius:50%;margin-top:8px;flex-shrink:0;}
   .field{margin-bottom:20px;}
   .field label{display:block;font-size:12px;color:var(--steel);margin-bottom:8px;font-family:var(--mono);}
   .field input, .field select, .field textarea{
@@ -67,7 +71,7 @@
   .field textarea{resize:vertical;min-height:90px;}
   .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--copper);outline-offset:-1px;border-color:var(--copper);}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .file-drop{border:1.5px dashed var(--steel-line);padding:24px;text-align:center;font-size:13px;color:var(--steel);margin-bottom:20px;background:#fff;}
+  .file-drop{border:1.5px dashed var(--steel-line);padding:22px;text-align:center;font-size:13px;color:var(--steel);margin-bottom:18px;background:#fff;}
   .file-drop strong{color:var(--copper);}
 
   .min-block{background:var(--graphite);color:#fff;padding:56px 0;}
@@ -80,7 +84,6 @@
   @media (max-width:1040px){
     nav ul{display:none;}
     .steps-grid{grid-template-columns:1fr 1fr;}
-    .order-layout{grid-template-columns:1fr;gap:36px;}
     .field-row{grid-template-columns:1fr;}
     .min-grid{grid-template-columns:1fr;}
   }
@@ -100,20 +103,20 @@
     padding:0 4px; line-height:1;
   }
 
-  .lead-card{background:#fff;border:1px solid var(--steel-line);padding:48px;}
-  .lead-card .ltag{font-family:var(--mono);font-size:11px;color:var(--copper);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block;}
-  .lead-card h2{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.01em;margin-bottom:12px;}
-  .lead-card .ldesc{color:var(--steel);font-size:14.5px;margin-bottom:32px;line-height:1.6;max-width:540px;}
-  .lead-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-  .lead-field label{display:block;font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;}
-  .lead-field input,.lead-field select,.lead-field textarea{width:100%;padding:13px 14px;border:1px solid var(--steel-line);font-family:var(--body);font-size:14px;color:var(--graphite);background:#fff;border-radius:1px;}
+  .lead-card{background:#fff;border:1px solid var(--steel-line);padding:43px;max-width:680px;margin:0 auto;}
+  .lead-card .ltag{font-family:var(--mono);font-size:11px;color:var(--copper);letter-spacing:.14em;text-transform:uppercase;margin-bottom:13px;display:block;}
+  .lead-card h2{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.01em;margin-bottom:11px;}
+  .lead-card .ldesc{color:var(--steel);font-size:14px;margin-bottom:29px;line-height:1.55;max-width:540px;}
+  .lead-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .lead-field label{display:block;font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+  .lead-field input,.lead-field select,.lead-field textarea{width:100%;padding:12px 13px;border:1px solid var(--steel-line);font-family:var(--body);font-size:14px;color:var(--graphite);background:#fff;border-radius:1px;}
   .lead-field input:focus,.lead-field select:focus,.lead-field textarea:focus{outline:2px solid var(--copper);outline-offset:-1px;border-color:var(--copper);}
-  .lead-field textarea{min-height:100px;resize:vertical;}
+  .lead-field textarea{min-height:90px;resize:vertical;}
   .lead-field.full{grid-column:1/-1;}
-  .checkboxes{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;}
+  .checkboxes{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px;}
   .checkboxes label{display:flex;align-items:center;gap:7px;font-size:14px;cursor:pointer;}
   .checkboxes input[type=checkbox]{accent-color:var(--copper);width:16px;height:16px;}
-  .check-label{font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .check-label{font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.06em;text-transform:uppercase;margin-bottom:9px;}
   footer{background:var(--graphite);color:#fff;padding:56px 0 0;}
   .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid #3A3937;}
   .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;text-decoration:none;}
@@ -173,7 +176,7 @@
   <div class="wrap">
     <span class="tag">Изделие под заказ</span>
     <h1>Изготовим коллектор, гидрострелку или узел по вашему чертежу</h1>
-    <p>Отправьте чертёж, эскиз или параметры объекта — рассчитаем конфигурацию, подберём диаметры и изготовим под ваш проект из AISI 304.</p>
+    <p>Отправьте чертёж, эскиз или параметры объекта — рассчитаем конфигурацию, подберём диаметры и изготовим под ваш проект.</p>
     <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
       <a href="#custom-order-form" class="btn btn-primary">Отправить чертёж / схему</a>
       <a href="#custom-order-form" class="btn btn-ghost">Запросить расчёт</a>
@@ -188,31 +191,26 @@
   </div>
   <div class="steps-grid">
     <div class="step-card">
-      <div class="num">01</div>
-      <h3>Заявка и параметры</h3>
+      <h3><span class="num">01 /</span> Заявка и параметры</h3>
       <p>Присылаете чертёж, эскиз или просто параметры (контуры, диаметры, расстояния) — инженер уточнит детали.</p>
     </div>
     <div class="step-card">
-      <div class="num">02</div>
-      <h3>Расчёт и КП</h3>
+      <h3><span class="num">02 /</span> Расчёт и КП</h3>
       <p>В течение 1–2 рабочих дней присылаем расчёт стоимости, срок изготовления и при необходимости — чертёж согласования.</p>
     </div>
     <div class="step-card">
-      <div class="num">03</div>
-      <h3>Производство</h3>
+      <h3><span class="num">03 /</span> Производство</h3>
       <p>Изготовление на собственном оборудовании с тем же контролем качества, что и для серийных изделий каталога.</p>
     </div>
     <div class="step-card">
-      <div class="num">04</div>
-      <h3>Испытание и отгрузка</h3>
+      <h3><span class="num">04 /</span> Испытание и отгрузка</h3>
       <p>Опрессовка, протокол испытаний, упаковка и отгрузка — с полным комплектом документов.</p>
     </div>
   </div>
 </div>
 
-<div class="wrap section" style="padding-top:0;">
-  <div class="order-layout">
-    <div>
+<div style="background:var(--bg-warm);">
+<div class="wrap section order-layout" style="padding-top:0;padding-bottom:64px;">
       <span class="tag">Что можно изменить</span>
       <h2>Параметры, которые обычно адаптируют под объект</h2>
       <p class="lead">Материал и технология те же, что у серийных изделий — меняется геометрия под параметры вашего объекта.</p>
@@ -224,12 +222,14 @@
         <li><span class="dot"></span>Дополнительные порты под датчики температуры, давления, дренаж</li>
         <li><span class="dot"></span>Маркировка изделия под объект или партию</li>
       </ul>
-    </div>
+</div>
+</div>
+
+<div class="wrap section">
           <div class="lead-card" id="custom-order-form">
       <span class="ltag">Заявка на расчёт</span>
       <h2>Отправьте параметры — рассчитаем конфигурацию</h2>
-      <p class="ldesc">Пришлите чертёж, эскиз или укажите параметры объекта. Ответим с расчётом стоимости и сроком изготовления в течение 1–2 рабочих дней.</p>
-      <div class="lead-row">
+      <div class="lead-row" style="margin-top:22px;">
         <div class="lead-field">
           <label>Имя *</label>
           <input type="text" placeholder="Как к вам обращаться">
@@ -279,10 +279,10 @@
         </div>
       </div>
       <div class="file-drop">Перетащите чертёж или эскиз сюда, либо <strong>выберите файл</strong> (PDF, DWG, JPG)</div>
-      <button class="btn btn-primary" style="padding:14px 32px;font-size:14px;">Отправить заявку</button>
-      <div class="form-note">Ответим с расчётом и сроком изготовления в течение 1–2 рабочих дней</div>
+      <div style="text-align:center;">
+        <button class="btn btn-primary" style="padding:13px 29px;font-size:14px;">Отправить заявку</button>
+      </div>
     </div>
-  </div>
 </div>
 
 <div class="min-block">
