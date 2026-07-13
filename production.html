@@ -20,11 +20,12 @@
   img{max-width:100%;display:block;}
 
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
-  .nav{display:flex;align-items:center;height:84px;flex-wrap:nowrap;gap:48px;padding-right:40px;}
+  .nav{display:flex;align-items:center;height:84px;flex-wrap:nowrap;padding-right:40px;}
+  header nav{flex:1;display:flex;justify-content:center;min-width:0;}
   .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;color:inherit;}
   .logo-img{height:40px;width:auto;display:block;}
   .logo:hover{opacity:.85;}
-  nav ul{list-style:none;display:flex;gap:34px;white-space:nowrap;}
+  nav ul{list-style:none;display:flex;gap:44px;white-space:nowrap;}
   nav ul a{font-size:14px;font-weight:500;color:var(--graphite);text-decoration:none;white-space:nowrap;}
   nav ul a:hover,nav ul a.active{color:var(--copper);}
   .nav-cta{display:flex;align-items:center;flex-shrink:0;margin-left:auto;}
