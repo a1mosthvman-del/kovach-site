@@ -21,12 +21,9 @@
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--steel-line);}
   .nav{display:flex;align-items:center;height:84px;flex-wrap:nowrap;gap:48px;padding-right:40px;}
   .logo{display:flex;align-items:center;gap:14px;flex-shrink:0;text-decoration:none;color:inherit;}
-  .logo-mark{width:38px;height:38px;flex-shrink:0;}
-  .logo-mark svg{width:100%;height:100%;display:block;}
-  .logo-text{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.1;}
-  .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.12em;color:var(--steel);text-transform:uppercase;margin-top:2px;}
+  .logo-img{height:40px;width:auto;display:block;}
   .logo:hover{opacity:.85;}
-  nav ul{list-style:none;display:flex;gap:26px;white-space:nowrap;}
+  nav ul{list-style:none;display:flex;gap:34px;white-space:nowrap;}
   nav ul a{font-size:14px;font-weight:500;color:var(--graphite);text-decoration:none;white-space:nowrap;}
   nav ul a:hover,nav ul a.active{color:var(--copper);}
   .nav-cta{display:flex;align-items:center;flex-shrink:0;margin-left:auto;}
@@ -35,10 +32,10 @@
   .btn-primary:hover{background:var(--copper);border-color:var(--copper);}
   .btn-ghost:hover{border-color:var(--copper);color:var(--copper);}
 
-  .page-head{padding:56px 0 40px;border-bottom:1px solid var(--steel-line);background:var(--bg-warm);}
+  .page-head{padding:48px 0 32px;border-bottom:1px solid var(--steel-line);background:var(--bg-warm);}
   .tag{font-family:var(--mono);font-size:12px;color:var(--copper);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;display:block;}
-  .page-head h1{font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-0.01em;max-width:680px;}
-  .page-head p{color:var(--steel);font-size:15px;margin-top:14px;max-width:560px;}
+  .page-head h1{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-0.01em;}
+  .page-head p{color:var(--steel);font-size:14.5px;margin-top:10px;max-width:560px;}
 
   .section{padding:72px 0;}
   .section-head{margin-bottom:44px;}
@@ -120,10 +117,7 @@
   footer{background:var(--graphite);color:#fff;padding:56px 0 0;}
   .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid #3A3937;}
   .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;text-decoration:none;}
-  .footer-logo .logo-mark{width:34px;height:34px;flex-shrink:0;}
-  .footer-logo .logo-mark svg{width:100%;height:100%;display:block;}
-  .footer-logo .logo-text{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.02em;line-height:1.1;color:#fff;}
-  .footer-logo .logo-text span{display:block;font-family:var(--body);font-weight:500;font-size:10px;letter-spacing:.12em;color:#74726C;text-transform:uppercase;margin-top:2px;}
+  .footer-logo-img{height:34px;width:auto;display:block;}
   .footer-about{font-size:13px;color:#74726C;line-height:1.65;max-width:280px;}
   .footer-col h4{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A8A6A0;margin-bottom:16px;}
   .footer-col ul{list-style:none;}
@@ -139,15 +133,7 @@
 <header>
   <div class="wrap nav">
     <a href="index.html" class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#262624"/>
-          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#262624"/>
-          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#262624"/>
-          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
-        </svg>
-      </div>
-      <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+      <img src="logo-kovach.png" alt="Ковач Гидравлик" class="logo-img">
     </a>
     <nav>
       <ul>
@@ -309,13 +295,7 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="footer-logo">
-          <div class="logo-mark"><svg viewBox="0 0 100 100" fill="none">
-          <path d="M0 0 H33.2 V3.8 H1.3 V100 H0 Z" fill="#ffffff"/>
-          <path d="M1.3 98 H100 V100 H0 V98 Z" fill="#ffffff"/>
-          <path d="M1.3 12.6 H24.7 V22.9 H1.3 V50.5 H0 V12.6 Z" fill="#ffffff"/>
-          <path d="M0 50.5 H1.3 V78.1 H22.6 V88.4 H0 Z" fill="#C8651F"/>
-        </svg></div>
-          <div class="logo-text">КОВАЧ ГИДРАВЛИК<span>Engineered Hydraulics</span></div>
+          <img src="logo-kovach-white.png" alt="Ковач Гидравлик" class="footer-logo-img">
         </a>
         <p class="footer-about">Производитель гидравлических коллекторов и гидрострелок из нержавеющей стали AISI 304. Собственное производство — от лазерной резки до опрессовки.</p>
       </div>
